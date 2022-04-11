@@ -5,14 +5,8 @@ Created: Sun Apr 10 2022 10:31:08 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import Layout from "../../components/common/Layout";
-
 const index = () => {
-    return (
-        <Layout sideBar>
-            <h1>Submission</h1>
-        </Layout>
-    );
+    return <h1>Submission</h1>;
 };
 
 export default index;

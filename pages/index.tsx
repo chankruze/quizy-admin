@@ -1,29 +1,12 @@
 import type { NextPage } from "next";
-import { useState, useEffect } from "react";
-import sidebarOptions from "../config/sidebarOptions";
-
-import { userService } from "../services";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
-    const [user, setUser] = useState(null);
+    const router = useRouter();
 
-    useEffect(() => {
-        setUser(userService.userValue);
-    }, []);
+    router.push("/dashboard");
 
-    return (
-        <div>
-            {sidebarOptions &&
-                sidebarOptions.map((option, index) => (
-                    <div key={index}>
-                        <p>
-                            {option.title}
-                            {option.icon}
-                        </p>
-                    </div>
-                ))}
-        </div>
-    );
+    return <></>;
 };
 
 export default Home;

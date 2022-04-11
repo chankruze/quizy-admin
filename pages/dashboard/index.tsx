@@ -6,14 +6,45 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import { NextPage } from "next";
-import React from "react";
-import Layout from "../../components/common/Layout";
+import ProgressRing from "../../components/ProgressRing";
 
 const DashBoard: NextPage = () => {
     return (
-        <Layout sideBar>
-            <h1>Dashboard</h1>
-        </Layout>
+        <div className="flex">
+            <div className="flex-1 p-8 relative flex justify-center items-center">
+                <div className="absolute">
+                    <p className="text-center text-7xl font-bold text-yellow-400">
+                        80
+                    </p>
+                    <p className="text-center capitalize text-lg">
+                        Total Quizzes
+                    </p>
+                </div>
+                <ProgressRing percentage={80} color="#fbbf24" />
+            </div>
+            <div className="flex-1 p-8 relative flex justify-center items-center">
+                <div className="absolute">
+                    <p className="text-center text-7xl font-bold text-green-400">
+                        1121
+                    </p>
+                    <p className="text-center capitalize text-lg">
+                        Submissions recorded
+                    </p>
+                </div>
+                <ProgressRing percentage={1121} color="#34d399" />
+            </div>
+            <div className="flex-1 p-8 relative flex justify-center items-center">
+                <div className="absolute">
+                    <p className="text-center text-7xl font-bold text-pink-400">
+                        689
+                    </p>
+                    <p className="text-center capitalize text-lg">
+                        Registered Students
+                    </p>
+                </div>
+                <ProgressRing percentage={689} color="#f472b6" />
+            </div>
+        </div>
     );
 };
 

@@ -1,11 +1,14 @@
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
 import RouteGuard from "../components/RouteGuard";
+import Layout from "../components/common/Layout";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <RouteGuard>
-            <Component {...pageProps} />
+            <Layout sideBar>
+                <Component {...pageProps} />
+            </Layout>
         </RouteGuard>
     );
 };
