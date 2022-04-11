@@ -17,6 +17,8 @@ const SideBar = () => {
         setUser(userService.userValue);
     }, []);
 
+    if (!user) return null;
+
     return (
         <div className="pl-2 pt-2 pb-2 w-64 flex flex-col">
             <Top />

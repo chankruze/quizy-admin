@@ -41,7 +41,7 @@ const Layout: React.FC<Props> = ({ title, sideBar, className, children }) => {
                 <meta name="youtube" content={config.APP_AUTHOR_YOUTUBE} />
             </Head>
             {sideBar && <SideBar />}
-            <main className="flex-1 p-2 m-2 bg-white rounded-md overflow-y-auto">
+            <main className="flex-1 bg-white rounded-md overflow-y-auto">
                 {children}
             </main>
         </div>
