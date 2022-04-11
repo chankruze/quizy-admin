@@ -8,19 +8,14 @@ Copyright (c) geekofia 2022 and beyond
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import { IconContext } from "react-icons";
-
-interface OptionProps {
-    title: string;
-    icon: any;
-    link: string;
-}
+import { OptionType } from "../../../types/option";
 
 const isActive = (link: string) => {
     const router = useRouter();
     return router.pathname === link;
 };
 
-const Option: React.FC<OptionProps> = ({ title, icon, link }) => {
+const Option: React.FC<OptionType> = ({ title, icon, link }) => {
     return (
         <Link href={link}>
             <a

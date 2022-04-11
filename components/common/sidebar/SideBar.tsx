@@ -8,11 +8,7 @@ Copyright (c) geekofia 2022 and beyond
 import Bottom from "./Bottom";
 import Top from "./Top";
 
-interface SideBarProps {
-    className?: string;
-}
-
-const SideBar: React.FC<SideBarProps> = ({ className }) => {
+const SideBar = () => {
     return (
         <div className="pl-2 pt-2 pb-2 w-64 flex flex-col">
             <Top />

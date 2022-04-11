@@ -12,7 +12,7 @@ import Layout from "../../components/common/Layout";
 const DashBoard: NextPage = () => {
     return (
         <Layout sideBar>
-            
+            <h1>Dashboard</h1>
         </Layout>
     );
 };

@@ -8,22 +8,14 @@ Copyright (c) geekofia 2022 and beyond
 import Head from "next/head";
 import { config } from "../../config";
 import SideBar from "./sidebar/SideBar";
-import TopBar from "./TopBar";
 
 interface Props {
     title?: string;
-    topBar?: true | undefined;
     sideBar?: true | undefined;
     className?: string | undefined;
 }
 
-const Layout: React.FC<Props> = ({
-    title,
-    topBar,
-    sideBar,
-    className,
-    children,
-}) => {
+const Layout: React.FC<Props> = ({ title, sideBar, className, children }) => {
     return (
         <div
             className={`flex h-screen w-full bg-gray-200 ${className} select-none overflow-hidden`}

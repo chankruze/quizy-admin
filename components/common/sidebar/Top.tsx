@@ -11,8 +11,8 @@ import Option from "./Option";
 const Top = () => {
     return (
         <div className="w-full p-2 flex-1 bg-white rounded-md">
-            {sidebarOptions.map((option, index) => (
-                <Option {...option} />
+            {sidebarOptions.map((option) => (
+                <Option key={option.title} {...option} />
             ))}
         </div>
     );
