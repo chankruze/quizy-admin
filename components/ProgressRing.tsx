@@ -11,13 +11,13 @@ Created: Fri Apr 08 2022 18:50:32 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-const radius = (c) => c / (Math.PI * 2);
+const radius = (c: number) => c / (Math.PI * 2);
 // const circumference = (r) => 2 * Math.PI * r;
 
 // constants
 const c = 100;
 const r = radius(c);
-const diameter = (r) => r * 2;
+const diameter = (r: number) => r * 2;
 const strokeWidth = 2.8;
 // svg constants
 const vBoxWidth = 36 + strokeWidth * 2;
@@ -36,7 +36,7 @@ const ProgressRing = ({ percentage, color }: Props) => {
         <svg viewBox={`0 0 ${vBoxWidth} ${vBoxHeight}`}>
             <path
                 stroke="#eeeeee"
-                stroke-width={strokeWidth + 1}
+                strokeWidth={strokeWidth + 1}
                 strokeLinecap="round"
                 fill="none"
                 d={`M${mx} ${my}
@@ -46,7 +46,7 @@ const ProgressRing = ({ percentage, color }: Props) => {
             <path
                 className="animate-progress"
                 stroke={color}
-                stroke-width={strokeWidth}
+                strokeWidth={strokeWidth}
                 strokeLinecap="round"
                 fill="none"
                 strokeDasharray={`${percentage}, 100`}

@@ -18,7 +18,7 @@ interface Props {
 const Layout: React.FC<Props> = ({ title, sideBar, className, children }) => {
     return (
         <div
-            className={`flex h-screen w-full bg-gray-200 ${className} select-none overflow-hidden`}
+            className={`flex h-screen w-full bg-white ${className} select-none overflow-hidden`}
         >
             {/* head */}
             <Head>
