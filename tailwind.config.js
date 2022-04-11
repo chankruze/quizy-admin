@@ -6,7 +6,13 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                poppins: ["Poppins", "sans-serif"],
+                roboto: ["Roboto", "sans-serif"],
+                nunito: ["Nunito", "sans-serif"],
+            },
+        },
     },
     variants: {
         extend: {},
