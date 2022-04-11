@@ -6,45 +6,45 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import {
-    MdOutlineDashboard,
-    MdOutlineQuiz,
-    MdOutlineLogout,
-    MdPersonOutline,
-    MdOutlineFolder,
+    MdDashboard,
+    MdQuiz,
+    MdLogout,
+    MdPerson,
+    MdFolder,
 } from "react-icons/md";
 
 const sidebarOptions = [
     {
         title: "Dashboard",
-        icon: <MdOutlineDashboard />,
+        icon: <MdDashboard />,
         link: "/dashboard",
         isVisible: true,
         submenu: [],
     },
     {
         title: "Quizzes",
-        icon: <MdOutlineQuiz />,
+        icon: <MdQuiz />,
         link: "/quiz",
         isVisible: true,
         submenu: [],
     },
     {
         title: "Student",
-        icon: <MdPersonOutline />,
+        icon: <MdPerson />,
         link: "/student",
         isVisible: true,
         submenu: [],
     },
     {
         title: "Submission",
-        icon: <MdOutlineFolder />,
+        icon: <MdFolder />,
         link: "/submission",
         isVisible: true,
         submenu: [],
     },
     {
         title: "Logout",
-        icon: <MdOutlineLogout />,
+        icon: <MdLogout />,
         link: "/logout",
         isVisible: true,
         submenu: [],
