@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "name": "Admin",
+        "password": "admin",
+        "email": "admin@quizy.tk",
+        "avatar": "https://picsum.photos/200"
+    }
+]

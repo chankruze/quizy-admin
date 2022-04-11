@@ -16,18 +16,22 @@ const isActive = (link: string) => {
 };
 
 const Option: React.FC<OptionType> = ({ title, icon, link }) => {
+    const active = isActive(link);
+
     return (
         <Link href={link}>
             <a
                 className={`px-2 py-3 flex items-center cursor-pointer rounded-md
                 duration-200
                 hover:bg-green-100 active:bg-green-500
-                ${
-                    isActive(link) &&
-                    "bg-green-500 hover:bg-green-500 text-white"
-                }`}
+                ${active && "bg-green-500 hover:bg-green-500 text-white"}`}
             >
-                <IconContext.Provider value={{ size: "28" }}>
+                <IconContext.Provider
+                    value={{
+                        size: "28",
+                        color: `${active ? "white" : "green"}`,
+                    }}
+                >
                     {icon}
                     <p className="pl-2 font-roboto font-medium">{title}</p>
                 </IconContext.Provider>
