@@ -16,7 +16,7 @@ interface Props {
 }
 
 const StudentCard: React.FC<Props> = ({ student, onClick, selected }) => {
-    const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
+    const [anchorPoint, setAnchorPoint] = useState({ x: 256, y: 0 });
     const [show, setShow] = useState(false);
 
     const handleContextMenu = useCallback(
@@ -43,7 +43,7 @@ const StudentCard: React.FC<Props> = ({ student, onClick, selected }) => {
         [setAnchorPoint, setShow],
     );
 
-    const handleClick = useCallback(() => setShow((prev) => !prev), [show]);
+    const handleClick = useCallback(() => setShow(false), [show]);
 
     useEffect(() => {
         document.addEventListener("contextmenu", handleContextMenu);
