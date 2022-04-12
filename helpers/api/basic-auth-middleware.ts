@@ -5,7 +5,6 @@ Created: Mon Apr 11 2022 09:45:47 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import { NextApiRequest, NextApiResponse } from "next";
 import { usersRepo } from "../users-repo";
 
 export const basicAuthMiddleware = async (req: any, res: any) => {

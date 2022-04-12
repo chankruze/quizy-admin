@@ -7,7 +7,7 @@ Copyright (c) geekofia 2022 and beyond
 
 import { errorHandler } from "./error-handler";
 import { basicAuthMiddleware } from "./basic-auth-middleware";
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export const apiHandler = (handler: any) => {
     return async (req: NextApiRequest, res: NextApiResponse) => {

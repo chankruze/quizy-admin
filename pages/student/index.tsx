@@ -11,7 +11,7 @@ import { fetcher } from "../../utils/fetcher";
 
 const index = () => {
     const { data, error } = useSWR(
-        "http://localhost:6767/api/student/semester/6",
+        `${process.env.NEXT_PUBLIC_API_URL}/student/semester/6`,
         fetcher,
     );
 

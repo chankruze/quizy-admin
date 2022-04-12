@@ -6,7 +6,7 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 // users in JSON file for simplicity, store in a db for production applications
-const users = require("../data/users.json");
+import users from "../data/users.json";
 
 export const usersRepo = {
     getAll: () => users,
