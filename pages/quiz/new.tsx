@@ -5,14 +5,19 @@ Created: Wed Apr 13 2022 08:32:42 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import { FieldArray, Form, Formik, FormikValues } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+// components
+import { FieldArray, Form, Formik, FormikValues } from "formik";
 import Divider from "../../components/common/Divider";
 import Input from "../../components/formik-controls/Input";
 import Select from "../../components/formik-controls/Select";
 import SubmitButton from "../../components/formik-controls/SubmitButton";
 import TextArea from "../../components/formik-controls/TextArea";
+import DatePicker from "../../components/formik-controls/DatePicker";
+// icons
 import { MdAdd, MdDelete } from "react-icons/md";
+// data
 import { branches, semesters } from "../../config/academicData";
 
 const optionData = [
@@ -69,6 +74,7 @@ const NewQuiz = () => {
     description: "",
     semester: "",
     branch: "",
+    date: new Date(),
     questions: [questionData],
   };
 
@@ -77,6 +83,7 @@ const NewQuiz = () => {
     description: Yup.string().required("Description is required"),
     semester: Yup.string().required("Semester is required"),
     branch: Yup.string().required("Branch is required"),
+    date: Yup.string().required("Date is required"),
     questions: Yup.array()
       .of(
         Yup.object({
@@ -94,14 +101,19 @@ const NewQuiz = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (values: FormikValues, formikBag: any) => {
-    // TODO: submit the form to the server
-    setTimeout(() => {
-      // simulate server latency
-      console.log(values);
-      // if onSubmit is async we don't need to call setSubmitting(false)
-      formikBag.setSubmitting(false);
-      formikBag.resetForm();
-    }, 5000);
+    // polish values
+    // send to server
+    axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/quiz/new`, values)
+      .then((res) => {
+        if (res.status === 201) {
+          formikBag.setSubmitting(false);
+          formikBag.resetForm();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -146,6 +158,8 @@ const NewQuiz = () => {
                 label="Branch"
               />
             </div>
+
+            <DatePicker id="date" name="date" label="Test Date & Time" />
 
             <Divider />
 

@@ -6,10 +6,11 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 export type Quiz = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   branch: string;
   semester: string;
+  date: string;
   questions: Array<any>;
 };
