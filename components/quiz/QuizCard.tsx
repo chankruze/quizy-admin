@@ -5,6 +5,7 @@ Created: Fri Apr 15 2022 09:25:11 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
+import { useRouter } from "next/router";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Quiz } from "../../types/quiz";
 import ActionButton from "./ActionButton";
@@ -16,8 +17,10 @@ interface QuizCardProps {
 }
 
 const QuizCard: React.FC<QuizCardProps> = ({ quiz, onClick, selected }) => {
-  const handleClick = () => {
-    console.log("clicked");
+  const router = useRouter();
+
+  const handleEditClick = () => {
+    router.push(`/quiz/${quiz._id}/edit`);
   };
 
   return (
@@ -37,8 +40,12 @@ const QuizCard: React.FC<QuizCardProps> = ({ quiz, onClick, selected }) => {
       {/* actions menu (if selected) */}
       {selected && (
         <div className="flex gap-4">
-          <ActionButton icon={MdDelete} label="Delete" onClick={handleClick} />
-          <ActionButton icon={MdEdit} label="Edit" onClick={handleClick} />
+          <ActionButton
+            icon={MdDelete}
+            label="Delete"
+            onClick={handleEditClick}
+          />
+          <ActionButton icon={MdEdit} label="Edit" onClick={handleEditClick} />
         </div>
       )}
     </div>

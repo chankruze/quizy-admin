@@ -26,14 +26,16 @@ const QuizzesList = () => {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
+  console.log(data)
+
   return (
     <div>
-      {data.map((quiz: Quiz) => (
+      {data.quizzes.map((quiz: Quiz) => (
         <QuizCard
-          key={quiz.id}
+          key={quiz._id}
           quiz={quiz}
           onClick={handleQuizClick}
-          selected={quiz.id === selectedQuiz?.id}
+          selected={quiz._id === selectedQuiz?._id}
         />
       ))}
     </div>
