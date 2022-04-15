@@ -13,101 +13,55 @@ import Select from "../../components/formik-controls/Select";
 import SubmitButton from "../../components/formik-controls/SubmitButton";
 import TextArea from "../../components/formik-controls/TextArea";
 import { MdAdd, MdDelete } from "react-icons/md";
+import { branches, semesters } from "../../config/academicData";
 
 const optionData = [
   {
     label: "Option A",
     value: "",
-    answer: 0,
   },
   {
     label: "Option B",
     value: "",
-    answer: 1,
   },
   {
     label: "Option C",
     value: "",
-    answer: 2,
   },
   {
     label: "Option D",
     value: "",
-    answer: 3,
+  },
+];
+
+const correctOptionData = [
+  {
+    label: "-- Select Correct Option --",
+    value: "",
+  },
+  {
+    label: "Option A",
+    value: 0,
+  },
+  {
+    label: "Option B",
+    value: 1,
+  },
+  {
+    label: "Option C",
+    value: 2,
+  },
+  {
+    label: "Option D",
+    value: 3,
   },
 ];
 
 const questionData = {
   title: "",
   options: optionData,
-  answer: 0,
+  answer: "",
 };
-
-const semesters = [
-  {
-    label: "-- Select Semester --",
-    value: "",
-  },
-  {
-    value: "1",
-    label: "1st",
-  },
-  {
-    value: "2",
-    label: "2nd",
-  },
-  {
-    value: "3",
-    label: "3rd",
-  },
-  {
-    value: "4",
-    label: "4th",
-  },
-  {
-    value: "5",
-    label: "5th",
-  },
-  {
-    value: "6",
-    label: "6th",
-  },
-  {
-    value: "7",
-    label: "7th",
-  },
-];
-
-const branches = [
-  {
-    label: "-- Select Branch --",
-    value: "",
-  },
-  {
-    label: "Computer Science & Engineering",
-    value: "CSE",
-  },
-  {
-    label: "Electronics & Communication Engineering",
-    value: "ECE",
-  },
-  {
-    label: "Electrical & Electronics Engineering",
-    value: "EEE",
-  },
-  {
-    label: "Mechanical Engineering",
-    value: "ME",
-  },
-  {
-    label: "Civil Engineering",
-    value: "CE",
-  },
-  {
-    label: "Information Technology",
-    value: "IT",
-  },
-];
 
 const NewQuiz = () => {
   const initialValues = {
@@ -126,26 +80,26 @@ const NewQuiz = () => {
     questions: Yup.array()
       .of(
         Yup.object({
-          title: Yup.string().required("Question title is required"),
+          title: Yup.string().required("Title is required"),
           options: Yup.array().of(
             Yup.object({
-              value: Yup.string().required("Option value is required"),
+              value: Yup.string().required("Value is required"),
             }),
           ),
-          answer: Yup.number().required("Answer is required"),
+          answer: Yup.string().required("Answer is required"),
         }),
       )
       .required("Must add a question"),
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (values: FormikValues, formikBag: any) => {
+  const onSubmit = (values: FormikValues, formikBag: any) => {
     // TODO: submit the form to the server
     setTimeout(() => {
       // simulate server latency
       console.log(values);
-      // onSubmit is async hence we don't need to call setSubmitting(false)
-      //   formikBag.setSubmitting(false);
+      // if onSubmit is async we don't need to call setSubmitting(false)
+      formikBag.setSubmitting(false);
       formikBag.resetForm();
     }, 5000);
   };
@@ -175,7 +129,7 @@ const NewQuiz = () => {
               label="Quiz Description"
             />
 
-            <div className="flex flex-wrap items-center">
+            <div className="flex flex-wrap items-center gap-4">
               {/* (select) quiz semester */}
               <Select
                 id="semester"
@@ -227,6 +181,16 @@ const NewQuiz = () => {
                                 />
                               </div>
                             ))}
+                          </div>
+
+                          {/* correct option */}
+                          <div>
+                            <Select
+                              id={`questions-${qIdx}-answer`}
+                              name={`questions[${qIdx}].answer`}
+                              options={correctOptionData}
+                              label="Correct answer"
+                            />
                           </div>
 
                           {/* (button) remove question */}

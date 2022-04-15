@@ -12,12 +12,12 @@ interface Props {
   id: string;
   name: string;
   label: string;
-  options: { label: string; value: string }[];
+  options: { label: string; value: string | number }[];
 }
 
 const Select: React.FC<Props> = ({ id, name, label, options }) => {
   return (
-    <div className="flex-1 px-2 flex items-center">
+    <div className="my-1 flex-1 flex items-center">
       <Label htmlFor={id} value={label} />
       <Field
         id={id}
