@@ -8,18 +8,22 @@ Copyright (c) geekofia 2022 and beyond
 import Divider from "../../components/common/Divider";
 import SearchBar from "../../components/common/SearchBar";
 import NewQuizButton from "../../components/quiz/NewQuizButton";
+import QuizzesList from "../../components/quiz/QuizzesList";
 
-const index = () => {
-    return (
-        <div className="p-2">
-            <div className="flex justify-between items-center gap-2">
-                <NewQuizButton />
-                <SearchBar placeholder="Search in Quizzes" />
-            </div>
-            <Divider />
-            <div></div>
-        </div>
-    );
+const Quiz = () => {
+  return (
+    <div className="p-2 overflow-hidden">
+      <div className="flex justify-between items-center gap-2">
+        <NewQuizButton />
+        <SearchBar placeholder="Search in Quizzes" />
+      </div>
+      <Divider />
+      <div className="overflow-hidden">
+        {/* list all tests form db */}
+        <QuizzesList />
+      </div>
+    </div>
+  );
 };
 
-export default index;
+export default Quiz;
