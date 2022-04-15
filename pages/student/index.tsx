@@ -9,20 +9,20 @@ import useSWR from "swr";
 import StudentList from "../../components/student/StudentList";
 import { fetcher } from "../../utils/fetcher";
 
-const index = () => {
-    const { data, error } = useSWR(
-        `${process.env.NEXT_PUBLIC_API_URL}/student/semester/6`,
-        fetcher,
-    );
+const Student = () => {
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/student/semester/6`,
+    fetcher,
+  );
 
-    if (error) return <div>failed to load</div>;
-    if (!data) return <div>loading...</div>;
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
 
-    return (
-        <div className="p-2">
-            <StudentList students={data.students} />
-        </div>
-    );
+  return (
+    <div className="p-2">
+      <StudentList students={data.students} />
+    </div>
+  );
 };
 
-export default index;
+export default Student;
