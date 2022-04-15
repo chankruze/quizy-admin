@@ -5,31 +5,33 @@ Created: Sun Apr 10 2022 06:04:54 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import { IconContext } from "react-icons";
-import { OptionType } from "../../../types/option";
+import { isActive } from "../../../utils";
 
-const isActive = (link: string) => {
-    const router = useRouter();
-    return router.pathname === link;
-};
+export interface SideBarOptionProps {
+    title: string;
+    icon: any;
+    link: string;
+    isVisible: boolean;
+    submenu: Array<unknown>;
+}
 
-const Option: React.FC<OptionType> = ({ title, icon, link }) => {
+const Option: React.FC<SideBarOptionProps> = ({ title, icon, link }) => {
     const active = isActive(link);
 
     return (
         <Link href={link}>
             <a
                 className={`px-2 py-3 flex items-center cursor-pointer rounded-md
-                duration-200
-                hover:bg-green-100 active:bg-green-500
-                ${active && "bg-green-500 hover:bg-green-500 text-white"}`}
+                duration-200 text-gray-600
+                hover:bg-green-100 active:bg-green-100
+                ${active && "bg-green-100 hover:bg-green-100 text-green-700"}`}
             >
                 <IconContext.Provider
                     value={{
                         size: "28",
-                        color: `${active ? "white" : "green"}`,
+                        color: `${active ? "green" : "gray"}`,
                     }}
                 >
                     {icon}

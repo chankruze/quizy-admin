@@ -19,7 +19,7 @@ const index = () => {
     if (!data) return <div>loading...</div>;
 
     return (
-        <div>
+        <div className="p-2">
             <StudentList students={data.students} />
         </div>
     );

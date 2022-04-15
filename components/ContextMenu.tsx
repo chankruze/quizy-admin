@@ -6,7 +6,7 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import { IconContext } from "react-icons";
-import { MdDownload, MdEdit, MdInfo } from "react-icons/md";
+import { MdEdit, MdInfo } from "react-icons/md";
 
 interface Props {
     anchorPoint: {
@@ -17,13 +17,6 @@ interface Props {
 }
 
 const menuOptions = [
-    {
-        label: "Download",
-        icon: MdDownload,
-        onClick: (data: any) => {
-            console.log("Download", data);
-        },
-    },
     {
         label: "Edit",
         icon: MdEdit,
@@ -43,7 +36,7 @@ const menuOptions = [
 const ContextMenu = ({ anchorPoint, data }: Props) => {
     return (
         <ul
-            className="absolute bg-white rounded-md w-48 shadow-md z-50 text-gray-600"
+            className="absolute bg-white w-48 shadow-md z-50 text-gray-600"
             style={{
                 left: `${anchorPoint.x}px`,
                 top: `${anchorPoint.y}px`,
@@ -53,8 +46,8 @@ const ContextMenu = ({ anchorPoint, data }: Props) => {
                 {menuOptions.map((option) => (
                     <li
                         key={option.label}
-                        className="flex items-center py-2 px-3 cursor-pointer 
-                        hover:bg-gray-200 rounded-md"
+                        className="flex items-center p-3 cursor-pointer 
+                        hover:bg-gray-200"
                         onClick={() => option.onClick(data)}
                     >
                         <p className="mr-3">

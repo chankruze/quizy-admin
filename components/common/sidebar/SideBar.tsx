@@ -20,7 +20,7 @@ const SideBar = () => {
     if (!user) return null;
 
     return (
-        <div className="pl-2 pt-2 pb-2 w-64 flex flex-col">
+        <div className="w-64 flex flex-col">
             <Top />
             {user && <Bottom user={user} />}
         </div>
