@@ -1,16 +1,20 @@
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
+import NextNprogress from "nextjs-progressbar";
 import RouteGuard from "../components/RouteGuard";
 import Layout from "../components/common/Layout";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-    return (
-        <RouteGuard>
-            <Layout sideBar>
-                <Component {...pageProps} />
-            </Layout>
-        </RouteGuard>
-    );
+  return (
+    <>
+      <NextNprogress options={{ showSpinner: false }} />
+      <RouteGuard>
+        <Layout sideBar>
+          <Component {...pageProps} />
+        </Layout>
+      </RouteGuard>
+    </>
+  );
 };
 
 export default MyApp;
