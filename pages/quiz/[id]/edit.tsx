@@ -6,6 +6,7 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import useSWR from "swr";
+import Router from "next/router";
 import { fetcher } from "../../../utils/fetcher";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -22,7 +23,6 @@ import DatePicker from "../../../components/formik-controls/DatePicker";
 import { MdAdd, MdDelete } from "react-icons/md";
 // data
 import { branches, semesters } from "../../../config/academicData";
-import { Key } from "react";
 
 const optionData = [
   {
@@ -118,6 +118,7 @@ const Edit = () => {
         if (res.status === 200) {
           formikBag.setSubmitting(false);
           formikBag.resetForm();
+          Router.push("/quiz");
         }
       })
       .catch((err) => {

@@ -18,7 +18,8 @@ const SubmitButton: React.FC<Props> = ({ label, isDisabled, isSubmitting }) => {
     <button
       type="submit"
       className="w-full flex items-center gap-1 justify-center capitalize p-3 rounded-md 
-      text-white bg-green-600 hover:bg-green-600/90 duration-200 disabled:bg-gray-500"
+      text-white bg-green-600 hover:bg-green-600/90 duration-200 disabled:bg-gray-200
+      disabled:cursor-not-allowed"
       disabled={isDisabled}
     >
       {isSubmitting && <Spinner />}

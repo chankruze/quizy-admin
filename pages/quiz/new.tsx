@@ -5,6 +5,7 @@ Created: Wed Apr 13 2022 08:32:42 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
+import Router from "next/router";
 import * as Yup from "yup";
 import axios from "axios";
 // components
@@ -109,6 +110,7 @@ const NewQuiz = () => {
         if (res.status === 201) {
           formikBag.setSubmitting(false);
           formikBag.resetForm();
+          Router.push("/quiz");
         }
       })
       .catch((err) => {
