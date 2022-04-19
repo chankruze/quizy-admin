@@ -6,16 +6,16 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import sidebarOptions from "../../../config/sidebarOptions";
-import Option from "./Option";
+import SideBarOption from "./SideBarOption";
 
 const Top = () => {
-    return (
-        <div className="w-full p-2 flex-1 bg-white rounded-md">
-            {sidebarOptions.map((option) => (
-                <Option key={option.title} {...option} />
-            ))}
-        </div>
-    );
+  return (
+    <div className="w-full p-2 flex-1 bg-white rounded-md">
+      {sidebarOptions.map((option) => (
+        <SideBarOption key={option.title} option={option} />
+      ))}
+    </div>
+  );
 };
 
 export default Top;

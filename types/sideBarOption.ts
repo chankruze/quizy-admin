@@ -7,10 +7,14 @@ Copyright (c) geekofia 2022 and beyond
 
 import { IconType } from "react-icons";
 
-export type OptionType = {
+export type SideBarOptionType = {
+  title: string;
+  icon: IconType;
+  link: string;
+  isVisible?: boolean;
+  submenu?: Array<{
     title: string;
-    icon: unknown;
     link: string;
-    isVisible: boolean;
-    submenu: Array<unknown>;
+    icon: IconType;
+  }>;
 };
