@@ -11,7 +11,7 @@ import { fetcher } from "../../utils/fetcher";
 
 const Student = () => {
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}/student/semester/6`,
+    `${process.env.NEXT_PUBLIC_API_URL}/student/all`,
     fetcher,
   );
 

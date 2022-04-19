@@ -6,36 +6,34 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import { useState } from "react";
-import { StudentType } from "../../types/student";
+import { Student } from "../../types/student";
 import StudentCard from "./StudentCard";
 
 interface Props {
-    students: StudentType[];
+  students: Student[];
 }
 
 const StudentList: React.FC<Props> = ({ students }) => {
-    const [selectedStudent, setSelectedStudent] = useState<StudentType | null>(
-        null,
-    );
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>();
 
-    const handleStudentClick = (student: StudentType) => {
-        setSelectedStudent(student);
-    };
+  const handleStudentClick = (student: Student) => {
+    setSelectedStudent(student);
+  };
 
-    return (
-        <div>
-            {students.map((student) => (
-                <StudentCard
-                    key={student.enrollmentNo}
-                    student={student}
-                    onClick={handleStudentClick}
-                    selected={
-                        student.enrollmentNo === selectedStudent?.enrollmentNo
-                    }
-                />
-            ))}
-        </div>
-    );
+  console.log(selectedStudent);
+
+  return (
+    <div>
+      {students.map((student, _idx) => (
+        <StudentCard
+          key={_idx}
+          student={student}
+          onClick={handleStudentClick}
+          selected={student.bioData?.regdNo === selectedStudent?.bioData.regdNo}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default StudentList;
