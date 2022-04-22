@@ -5,71 +5,69 @@ Created: Mon Apr 11 2022 16:55:57 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import { useCallback, useEffect, useState } from "react";
+import Router from "next/router";
+import { MdCheck, MdClear } from "react-icons/md";
 import { Student } from "../../types/student";
-import ContextMenu from "../ContextMenu";
+import { updateVerificationStatus } from "../../utils/actions";
+import ActionButton from "../ActionButton";
+import BranchBadge from "./BranchBadge";
+import VerificationBadge from "./VerificationBadge";
 
 interface Props {
   student: Student;
   onClick: (student: Student) => void;
   selected: boolean;
+  verificationBadge?: boolean;
+  showActions?: boolean;
 }
 
-const StudentCard: React.FC<Props> = ({ student, onClick, selected }) => {
-  const [anchorPoint, setAnchorPoint] = useState({ x: 256, y: 0 });
-  const [show, setShow] = useState(false);
-
+const StudentCard: React.FC<Props> = ({
+  student,
+  onClick,
+  selected,
+  verificationBadge,
+  showActions,
+}) => {
   const { bioData } = student;
 
-  const handleContextMenu = useCallback(
-    (event) => {
-      // console.log(event.pageX, event.pageY);
-      event.preventDefault();
-
-      // fixed x axis
-      // TODO: fix y axis
-      if (event.pageX + 192 > window.innerWidth) {
-        setAnchorPoint({
-          x: event.pageX - 192,
-          y: event.pageY,
-        });
-      } else {
-        setAnchorPoint({
-          x: event.pageX,
-          y: event.pageY,
-        });
-      }
-
-      setShow(true);
-    },
-    [setAnchorPoint, setShow],
-  );
-
-  const handleClick = useCallback(() => setShow(false), [show]);
-
-  useEffect(() => {
-    document.addEventListener("contextmenu", handleContextMenu);
-    document.addEventListener("click", handleClick);
-
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-      document.removeEventListener("click", handleClick);
-    };
-  });
+  const handleVerificationClick = async (status: string) => {
+    await updateVerificationStatus(student._id as string, status);
+    Router.reload();
+  };
 
   return (
     <div
-      className={`flex items-center p-3 justify-between border-b-[1px] ${
-        selected && "bg-green-100"
-      }`}
+      className={`flex items-center p-3 border-b ${selected && "bg-green-100"}`}
       onClick={() => onClick(student)}
     >
-      <p>{bioData.regdNo}</p>
-      <p>{bioData.name}</p>
-      <p>{bioData.email}</p>
-      <p>{bioData.branch}</p>
-      {show && selected && (
-        <ContextMenu anchorPoint={anchorPoint} data={student} />
+      <div className="flex-1 flex items-center gap-2">
+        {/* regd. no. */}
+        <p className="bg-yellow-200 px-2 rounded-md font-medium">
+          {bioData.regdNo}
+        </p>
+        {/* branch */}
+        <BranchBadge branch={bioData.branch} />
+        {/* name */}
+        <p className="font-poppins">{bioData.name}</p>
+        {/* verification */}
+        {verificationBadge && (
+          <VerificationBadge verification={student.verification} />
+        )}
+      </div>
+      {/* actions menu (if selected) */}
+      {selected && showActions && (
+        <div className="flex gap-4">
+          <ActionButton
+            icon={MdClear}
+            label="Reject"
+            onClick={() => handleVerificationClick("rejected")}
+          />
+          <ActionButton
+            icon={MdCheck}
+            label="Approve"
+            onClick={() => handleVerificationClick("verified")}
+          />
+        </div>
       )}
     </div>
   );

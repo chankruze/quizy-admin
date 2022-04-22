@@ -11,16 +11,20 @@ import StudentCard from "./StudentCard";
 
 interface Props {
   students: Student[];
+  verificationBadge?: boolean;
+  showActions?: boolean;
 }
 
-const StudentList: React.FC<Props> = ({ students }) => {
+const StudentList: React.FC<Props> = ({
+  students,
+  verificationBadge,
+  showActions,
+}) => {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>();
 
   const handleStudentClick = (student: Student) => {
     setSelectedStudent(student);
   };
-
-  console.log(selectedStudent);
 
   return (
     <div>
@@ -30,6 +34,8 @@ const StudentList: React.FC<Props> = ({ students }) => {
           student={student}
           onClick={handleStudentClick}
           selected={student.bioData?.regdNo === selectedStudent?.bioData.regdNo}
+          verificationBadge={verificationBadge}
+          showActions={showActions}
         />
       ))}
     </div>

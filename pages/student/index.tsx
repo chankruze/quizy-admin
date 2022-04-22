@@ -20,7 +20,7 @@ const Student = () => {
 
   return (
     <div className="p-2">
-      <StudentList students={data.students} />
+      <StudentList students={data.students} verificationBadge />
     </div>
   );
 };
