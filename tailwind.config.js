@@ -11,6 +11,7 @@ module.exports = {
                 poppins: ["Poppins", "sans-serif"],
                 roboto: ["Roboto", "sans-serif"],
                 nunito: ["Nunito", "sans-serif"],
+                montserrat: ["Montserrat", "sans-serif"],
             },
         },
     },

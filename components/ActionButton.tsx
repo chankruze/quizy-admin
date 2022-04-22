@@ -16,7 +16,7 @@ interface Props {
 const ActionButton: React.FC<Props> = (props) => {
   return (
     <div
-      className="flex flex-wrap items-center cursor-pointer gap-1 hover:animate-pulse"
+      className="flex flex-wrap items-center cursor-pointer gap-1 hover:opacity-70"
       onClick={props.onClick}
     >
       {props.icon && <props.icon size={20} />}
