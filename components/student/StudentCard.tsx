@@ -5,10 +5,10 @@ Created: Mon Apr 11 2022 16:55:57 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
+import axios from "axios";
 import Router from "next/router";
 import { MdCheck, MdClear } from "react-icons/md";
 import { Student } from "../../types/student";
-import { updateVerificationStatus } from "../../utils/actions";
 import ActionButton from "../ActionButton";
 import BranchBadge from "./BranchBadge";
 import VerificationBadge from "./VerificationBadge";
@@ -31,7 +31,9 @@ const StudentCard: React.FC<Props> = ({
   const { bioData } = student;
 
   const handleVerificationClick = async (status: string) => {
-    await updateVerificationStatus(student._id as string, status);
+    await axios.put(
+      `${process.env.NEXT_PUBLIC_API_URL}/student/${student._id}/verification/${status}`,
+    );
     Router.reload();
   };
 
