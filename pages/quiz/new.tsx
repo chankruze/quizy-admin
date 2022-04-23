@@ -8,6 +8,7 @@ Copyright (c) geekofia 2022 and beyond
 import Router from "next/router";
 import * as Yup from "yup";
 import axios from "axios";
+import { nanoid } from "nanoid";
 // components
 import { FieldArray, Form, Formik, FormikValues } from "formik";
 import Divider from "../../components/common/Divider";
@@ -20,6 +21,7 @@ import DatePicker from "../../components/formik-controls/DatePicker";
 import { MdAdd, MdDelete } from "react-icons/md";
 // data
 import { branches, semesters } from "../../config/academicData";
+import { Option, Question } from "../../types/quiz";
 
 const optionData = [
   {
@@ -102,10 +104,19 @@ const NewQuiz = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (values: FormikValues, formikBag: any) => {
-    // polish values
-    // send to server
+    // polish values (insert id, etc) and send to server
     axios
-      .post(`${process.env.NEXT_PUBLIC_API_URL}/quiz/new`, values)
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/quiz/new`, {
+        ...values,
+        questions: values.questions.map((question: Question) => ({
+          ...question,
+          options: question.options.map((option: Option) => ({
+            ...option,
+            id: nanoid(),
+          })),
+          id: nanoid(),
+        })),
+      })
       .then((res) => {
         if (res.status === 201) {
           formikBag.setSubmitting(false);
@@ -224,7 +235,9 @@ const NewQuiz = () => {
                     {/* (button) add new question */}
                     <button
                       type="button"
-                      onClick={() => arrayHelpers.push(questionData)}
+                      onClick={() =>
+                        arrayHelpers.push({ ...questionData, id: nanoid() })
+                      }
                       className="mt-2 py-2 px-4 text-lg b-0 flex justify-center items-center bg-green-600
                         text-white rounded cursor-poiner ml-auto transition duration-200 ease-in-out hover:bg-green-600/90"
                     >

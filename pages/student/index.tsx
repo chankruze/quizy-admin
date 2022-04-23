@@ -20,6 +20,12 @@ const Student = () => {
 
   return (
     <div className="p-2">
+      {/* TODO:
+          1. remove this card and implement table
+          2. add pagination
+          3. add search
+          4. add sorting
+      */}
       <StudentList students={data.students} verificationBadge />
     </div>
   );

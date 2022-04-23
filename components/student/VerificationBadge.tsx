@@ -13,7 +13,7 @@ const VerificationBadge = ({ verification }: Props) => {
   return (
     <p
       className={`px-2 rounded-md font-nunito text-sm
-      ${verification === "verified" ? "bg-green-200" : "bg-red-200"}`}
+      ${verification === "verified" ? "bg-green-100" : "bg-red-100"}`}
     >
       {verification}
     </p>

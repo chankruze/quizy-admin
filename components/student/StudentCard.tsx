@@ -42,15 +42,17 @@ const StudentCard: React.FC<Props> = ({
       className={`flex items-center p-3 border-b ${selected && "bg-green-100"}`}
       onClick={() => onClick(student)}
     >
-      <div className="flex-1 flex items-center gap-2">
-        {/* regd. no. */}
-        <p className="bg-yellow-200 px-2 rounded-md font-medium">
-          {bioData.regdNo}
-        </p>
-        {/* branch */}
-        <BranchBadge branch={bioData.branch} />
-        {/* name */}
-        <p className="font-poppins">{bioData.name}</p>
+      <div className="flex-1 flex justify-between">
+        <div className="flex items-center gap-2">
+          {/* regd. no. */}
+          <p className="bg-yellow-100 px-2 rounded-md font-medium">
+            {bioData.regdNo}
+          </p>
+          {/* branch */}
+          <BranchBadge branch={bioData.branch} />
+          {/* name */}
+          <p className="font-poppins">{bioData.name}</p>
+        </div>
         {/* verification */}
         {verificationBadge && (
           <VerificationBadge verification={student.verification} />

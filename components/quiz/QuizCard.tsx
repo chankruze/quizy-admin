@@ -5,6 +5,7 @@ Created: Fri Apr 15 2022 09:25:11 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
+import axios from "axios";
 import Router from "next/router";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Quiz } from "../../types/quiz";
@@ -17,8 +18,18 @@ interface QuizCardProps {
 }
 
 const QuizCard: React.FC<QuizCardProps> = ({ quiz, onClick, selected }) => {
+  // edit a quiz
   const handleEditClick = () => {
     Router.push(`/quiz/${quiz._id}/edit`);
+  };
+
+  // delete a quiz
+  const handleDeleteClick = () => {
+    axios
+      .delete(`${process.env.NEXT_PUBLIC_API_URL}/quiz/${quiz._id}`)
+      .then(() => {
+        Router.push("/quiz");
+      });
   };
 
   return (
@@ -41,7 +52,7 @@ const QuizCard: React.FC<QuizCardProps> = ({ quiz, onClick, selected }) => {
           <ActionButton
             icon={MdDelete}
             label="Delete"
-            onClick={handleEditClick}
+            onClick={handleDeleteClick}
           />
           <ActionButton icon={MdEdit} label="Edit" onClick={handleEditClick} />
         </div>
