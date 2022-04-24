@@ -11,6 +11,7 @@ import { fetcher } from "../../../utils/fetcher";
 import { useRouter } from "next/router";
 import axios from "axios";
 import * as Yup from "yup";
+import { nanoid } from "nanoid";
 // components
 import { FieldArray, Form, Formik, FormikValues } from "formik";
 import TextArea from "../../../components/formik-controls/TextArea";
@@ -19,10 +20,13 @@ import Divider from "../../../components/common/Divider";
 import Input from "../../../components/formik-controls/Input";
 import SubmitButton from "../../../components/formik-controls/SubmitButton";
 import DatePicker from "../../../components/formik-controls/DatePicker";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // icons
 import { MdAdd, MdDelete } from "react-icons/md";
 // data
 import { branches, semesters } from "../../../config/academicData";
+import { Option, Question } from "../../../types/quiz";
 
 const optionData = [
   {
@@ -113,12 +117,30 @@ const Edit = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (values: FormikValues, formikBag: any) => {
     axios
-      .put(`${process.env.NEXT_PUBLIC_API_URL}/quiz/${id}`, values)
+      .put(`${process.env.NEXT_PUBLIC_API_URL}/quiz/${id}`, {
+        ...values,
+        questions: values.questions.map((question: Question) => ({
+          ...question,
+          options: question.options.map((option: Option) => ({
+            ...option,
+            id: nanoid(),
+          })),
+          id: nanoid(),
+        })),
+      })
       .then((res) => {
         if (res.status === 200) {
-          formikBag.setSubmitting(false);
-          formikBag.resetForm();
-          Router.push("/quiz");
+          toast.success("Quiz updated!", {
+            theme: "colored",
+            autoClose: 1000,
+          });
+          // dont't wait for swr to update
+          setTimeout(() => {
+            formikBag.setSubmitting(false);
+            formikBag.resetForm();
+            Router.reload()
+            Router.push("/quiz");
+          }, 1000);
         }
       })
       .catch((err) => {
@@ -128,6 +150,7 @@ const Edit = () => {
 
   return (
     <div className="p-2">
+      <ToastContainer />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

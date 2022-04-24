@@ -17,6 +17,8 @@ import Select from "../../components/formik-controls/Select";
 import SubmitButton from "../../components/formik-controls/SubmitButton";
 import TextArea from "../../components/formik-controls/TextArea";
 import DatePicker from "../../components/formik-controls/DatePicker";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // icons
 import { MdAdd, MdDelete } from "react-icons/md";
 // data
@@ -119,9 +121,17 @@ const NewQuiz = () => {
       })
       .then((res) => {
         if (res.status === 201) {
-          formikBag.setSubmitting(false);
-          formikBag.resetForm();
-          Router.push("/quiz");
+          toast.success("New quiz added!", {
+            theme: "colored",
+            autoClose: 1000,
+          });
+          // dont't wait for swr to update
+          setTimeout(() => {
+            formikBag.setSubmitting(false);
+            formikBag.resetForm();
+            Router.reload();
+            Router.push("/quiz");
+          }, 1000);
         }
       })
       .catch((err) => {
@@ -131,6 +141,7 @@ const NewQuiz = () => {
 
   return (
     <div className="p-2">
+      <ToastContainer />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
