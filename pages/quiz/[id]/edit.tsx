@@ -80,16 +80,16 @@ const Edit = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, error } = useSWR(
+  const { data: quiz, error } = useSWR(
     id ? `${process.env.NEXT_PUBLIC_API_URL}/quiz/${id}` : null,
     fetcher,
   );
 
   if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  if (!quiz) return <div>loading...</div>;
 
   // initial values (form db)
-  const initialValues = { ...data.quiz, date: new Date(data.quiz.date) };
+  const initialValues = { ...quiz, date: new Date(quiz.date) };
 
   // validate form
   const validationSchema = Yup.object({
@@ -138,7 +138,7 @@ const Edit = () => {
           setTimeout(() => {
             formikBag.setSubmitting(false);
             formikBag.resetForm();
-            Router.reload()
+            Router.reload();
             Router.push("/quiz");
           }, 1000);
         }

@@ -55,7 +55,7 @@ function Login() {
     };
 
     return (
-        <div className="h-screen flex justify-center items-center bg-gray-200">
+        <div className="h-screen flex justify-center items-center">
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -73,7 +73,7 @@ function Login() {
                         className="p-2 rounded-md w-[400px]"
                     >
                         <div className="py-2">
-                            <div className="flex items-center bg-white text-black rounded-md py-2 px-4">
+                            <div className="flex items-center bg-white text-black rounded-md py-2 px-4 border shadow-md">
                                 <MdMail size={32} color="orange" />
                                 <input
                                     className="w-full text-lg p-3 border-0 outline-none"
@@ -94,7 +94,7 @@ function Login() {
                             )}
                         </div>
                         <div className="py-2">
-                            <div className="flex items-center bg-white text-black rounded-md py-2 px-4">
+                            <div className="flex items-center bg-white text-black rounded-md py-2 px-4 border shadow-md">
                                 <MdPassword size={28} color="orange" />
                                 <input
                                     className="w-full text-lg p-3 border-0 outline-none"

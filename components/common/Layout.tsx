@@ -7,18 +7,18 @@ Copyright (c) geekofia 2022 and beyond
 
 import Head from "next/head";
 import { config } from "../../config";
-import SideBar from "./sidebar/SideBar";
+import NavBar from "./NavBar";
 
 interface Props {
   title?: string;
-  sideBar?: true | undefined;
+  navBar?: true | undefined;
   className?: string | undefined;
 }
 
-const Layout: React.FC<Props> = ({ title, sideBar, className, children }) => {
+const Layout: React.FC<Props> = ({ title, navBar, className, children }) => {
   return (
     <div
-      className={`flex h-screen w-full bg-white ${className} select-none overflow-hidden`}
+      className={`flex flex-col h-screen w-full bg-white ${className} select-none overflow-hidden`}
     >
       {/* head */}
       <Head>
@@ -40,9 +40,14 @@ const Layout: React.FC<Props> = ({ title, sideBar, className, children }) => {
         <meta name="twitter" content={config.APP_AUTHOR_TWITTER} />
         <meta name="youtube" content={config.APP_AUTHOR_YOUTUBE} />
       </Head>
-      {sideBar && <SideBar />}
-      <main className="flex-1 bg-white rounded-md overflow-y-auto">
+      {navBar && <NavBar />}
+      <main className="hidden lg:flex flex-col w-full max-w-7xl m-auto flex-1">
         {children}
+      </main>
+      <main className="lg:hidden flex-1 p-4 flex justify-center items-center">
+        <p className="text-center font-montserrat ">
+          Website currently works only on Desktop view (min-width: 1024px)
+        </p>
       </main>
     </div>
   );

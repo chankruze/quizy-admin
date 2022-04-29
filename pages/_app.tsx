@@ -9,7 +9,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       <NextNprogress options={{ showSpinner: false }} />
       <RouteGuard>
-        <Layout sideBar>
+        <Layout navBar>
           <Component {...pageProps} />
         </Layout>
       </RouteGuard>

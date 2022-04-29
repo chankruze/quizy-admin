@@ -15,35 +15,35 @@ import {
 
 import { GoVerified, GoUnverified } from "react-icons/go";
 
-const sidebarOptions = [
+const navLinks = [
   {
     title: "Dashboard",
     icon: MdDashboard,
-    link: "/dashboard",
+    url: "/dashboard",
     isVisible: true,
     submenu: [],
   },
   {
     title: "Quizzes",
     icon: MdQuiz,
-    link: "/quiz",
+    url: "/quiz",
     isVisible: true,
     submenu: [],
   },
   {
     title: "Student",
     icon: MdPerson,
-    link: "/student",
+    url: "/student",
     isVisible: true,
     submenu: [
       {
         title: "Verified",
-        link: "/student/verified",
+        url: "/student/verified",
         icon: GoVerified,
       },
       {
         title: "Unverified",
-        link: "/student/unverified",
+        url: "/student/unverified",
         icon: GoUnverified,
       },
     ],
@@ -51,17 +51,17 @@ const sidebarOptions = [
   {
     title: "Submission",
     icon: MdFolder,
-    link: "/submission",
+    url: "/submission",
     isVisible: true,
     submenu: [],
   },
   {
     title: "Logout",
     icon: MdLogout,
-    link: "/logout",
+    url: "/logout",
     isVisible: true,
     submenu: [],
   },
 ];
 
-export default sidebarOptions;
+export default navLinks;

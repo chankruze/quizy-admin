@@ -14,8 +14,8 @@ const Quiz = () => {
   return (
     <div className="p-2 overflow-hidden">
       <div className="flex justify-between items-center gap-2">
-        <NewQuizButton />
         <SearchBar placeholder="Search in Quizzes" />
+        <NewQuizButton />
       </div>
       <Divider />
       <div className="overflow-hidden">

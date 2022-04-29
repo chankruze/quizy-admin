@@ -128,14 +128,19 @@ const NewQuiz = () => {
           // dont't wait for swr to update
           setTimeout(() => {
             formikBag.setSubmitting(false);
-            formikBag.resetForm();
-            Router.reload();
             Router.push("/quiz");
           }, 1000);
         }
       })
       .catch((err) => {
-        console.log(err);
+        toast.error("Quiz can't be added!", {
+          theme: "colored",
+          autoClose: 1000,
+        });
+        // dont't wait for swr to update
+        setTimeout(() => {
+          formikBag.setSubmitting(false);
+        }, 1000);
       });
   };
 

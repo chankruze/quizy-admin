@@ -7,14 +7,14 @@ Copyright (c) geekofia 2022 and beyond
 
 import { IconType } from "react-icons";
 
-export type SideBarOptionType = {
+export type NavLinkType = {
   title: string;
   icon: IconType;
-  link: string;
+  url: string;
   isVisible?: boolean;
   submenu?: Array<{
     title: string;
-    link: string;
+    url: string;
     icon: IconType;
   }>;
 };
