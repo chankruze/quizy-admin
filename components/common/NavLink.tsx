@@ -21,9 +21,9 @@ const NavLink: React.FC<Props> = ({ link }) => {
       <Link href={link.url} key={link.title}>
         <a
           className={`flex items-center p-3 font-medium  rounded-md 
-          ${active ? "text-blue-600" : "text-gray-300"}`}
+          ${active ? "text-green-600" : "text-gray-300"}`}
         >
-          <link.icon size={32} />
+          <link.icon size={28} />
           <p className="pl-1">{link.title}</p>
         </a>
       </Link>
