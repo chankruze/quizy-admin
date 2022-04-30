@@ -6,6 +6,7 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import React from "react";
+import { FcDeleteDatabase } from "react-icons/fc";
 import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 import Spinner from "../common/Spinner";
@@ -19,14 +20,13 @@ const VerifiedTab = () => {
 
   return (
     <div className="w-full">
-      {/* TODO:
-          1. remove this card and implement table
-          2. add pagination
-          3. add search
-          4. add sorting
-      */}
-      {data && data.length > 0 && (
-        <StudentList students={data} verificationBadge />
+      {data && data.length > 0 ? (
+        <StudentList students={data} />
+      ) : (
+        <div className="flex items-center justify-center p-4">
+          <FcDeleteDatabase size={48} />
+          <p className="ml-2 text-xl capitalize">No verified students</p>
+        </div>
       )}
       {isValidating && (
         <div
