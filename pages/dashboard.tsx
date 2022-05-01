@@ -26,7 +26,7 @@ const DashBoard: NextPage = () => {
           bg="bg-gradient-to-bl from-green-50 to-green-500"
         />
         <StatsCard
-          dataUrl="/quiz/all/count"
+          dataUrl="/submission/all/count"
           title="Submissions"
           bg="bg-gradient-to-bl from-green-50 to-blue-500"
         />

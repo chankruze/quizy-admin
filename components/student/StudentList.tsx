@@ -12,9 +12,10 @@ import VerificationBadge from "./VerificationBadge";
 
 interface Props {
   students: Student[];
+  title: string;
 }
 
-const StudentList: React.FC<Props> = ({ students }) => {
+const StudentList: React.FC<Props> = ({ students, title }) => {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>();
 
   const handleStudentClick = (student: Student) => {
@@ -53,7 +54,7 @@ const StudentList: React.FC<Props> = ({ students }) => {
 
   return (
     <div>
-      <StudentTable columns={columns} data={students} />
+      <StudentTable columns={columns} data={students} title={title} />
     </div>
   );
 };

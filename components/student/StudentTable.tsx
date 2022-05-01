@@ -19,9 +19,10 @@ import { GlobalFilter } from "../common/GlobalFilter";
 interface StudentTableProps {
   columns: any;
   data: Array<Student>;
+  title: string;
 }
 
-const StudentTable: React.FC<StudentTableProps> = ({ columns, data }) => {
+const StudentTable: React.FC<StudentTableProps> = ({ columns, data, title }) => {
   // Use the state and functions returned from useTable to build your UI
   const tableInstance = useTable(
     {
@@ -59,7 +60,7 @@ const StudentTable: React.FC<StudentTableProps> = ({ columns, data }) => {
   return (
     <>
       <div className="flex justify-between items-center">
-        <p className="text-3xl font-poppins font-semibold text-blue-500">Verified Students</p>
+        <p className="text-3xl font-poppins font-semibold text-blue-500">{title}</p>
         <GlobalFilter
           filter={globalFilter}
           setFilter={setGlobalFilter}

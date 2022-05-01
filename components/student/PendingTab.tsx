@@ -6,7 +6,7 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import React from "react";
-import { FcDeleteDatabase } from "react-icons/fc";
+import { GoCheck } from "react-icons/go";
 import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 import Spinner from "../common/Spinner";
@@ -21,10 +21,10 @@ const PendingTab = () => {
   return (
     <div className="w-full">
       {data && data.length > 0 ? (
-        <StudentList students={data} />
+        <StudentList students={data} title="Pending Verification" />
       ) : (
         <div className="flex items-center justify-center p-4">
-          <FcDeleteDatabase size={48} />
+          <GoCheck size={48} className="text-blue-500" />
           <p className="ml-2 text-xl capitalize">
             No biodata verification pending
           </p>

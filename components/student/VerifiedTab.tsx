@@ -21,7 +21,7 @@ const VerifiedTab = () => {
   return (
     <div className="w-full">
       {data && data.length > 0 ? (
-        <StudentList students={data} />
+        <StudentList students={data} title="Verified Students" />
       ) : (
         <div className="flex items-center justify-center p-4">
           <FcDeleteDatabase size={48} />
