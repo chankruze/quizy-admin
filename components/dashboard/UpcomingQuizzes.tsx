@@ -7,10 +7,11 @@ Copyright (c) geekofia 2022 and beyond
 
 import React from "react";
 import useSWR from "swr";
-import { Quiz } from "../../types/quiz";
+import { MinifiedQuiz, Quiz } from "../../types/quiz";
 import { fetcher } from "../../utils/fetcher";
 import moment from "moment";
 import Spinner from "../common/Spinner";
+import QuizListItem from "../common/QuizListItem";
 
 const UpcomingQuizzes = () => {
   const { data, isValidating } = useSWR(
@@ -26,21 +27,8 @@ const UpcomingQuizzes = () => {
       <div>
         {data &&
           data.length > 0 &&
-          data.map((quiz: Quiz) => (
-            <div key={quiz._id} className="flex items-center p-3 border-b">
-              <div className="flex-1 flex items-center gap-2">
-                <p className="bg-green-100 px-2 rounded-md font-nunito">
-                  {moment(quiz.date).format("MMM DD YYYY, hh:mm A")}
-                </p>
-                <p className="bg-yellow-100 px-2 rounded-md font-nunito">
-                  {quiz.semester}
-                </p>
-                <p className="bg-blue-100 px-2 rounded-md font-nunito">
-                  {quiz.branch}
-                </p>
-                <p className="font-poppins">{quiz.title}</p>
-              </div>
-            </div>
+          data.map((quiz: MinifiedQuiz) => (
+            <QuizListItem key={quiz._id} quiz={quiz} />
           ))}
       </div>
       {isValidating && (

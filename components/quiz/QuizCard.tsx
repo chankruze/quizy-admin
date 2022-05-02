@@ -8,12 +8,12 @@ Copyright (c) geekofia 2022 and beyond
 import axios from "axios";
 import Router from "next/router";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { Quiz } from "../../types/quiz";
+import { MinifiedQuiz, Quiz } from "../../types/quiz";
 import ActionButton from "../ActionButton";
 
 interface QuizCardProps {
-  quiz: Quiz;
-  onClick: (quiz: Quiz) => void;
+  quiz: Quiz | MinifiedQuiz;
+  onClick: (quiz: Quiz | MinifiedQuiz) => void;
   selected: boolean;
 }
 

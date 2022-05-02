@@ -18,19 +18,17 @@ const QuizzesList = () => {
     setSelectedQuiz(quiz);
   };
 
-  const { data, error } = useSWR(
+  const { data: quizzes, error } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}/quiz/all`,
     fetcher,
   );
 
   if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
-  console.log(data)
+  if (!quizzes) return <div>loading...</div>;
 
   return (
     <div>
-      {data.quizzes.map((quiz: Quiz) => (
+      {quizzes.map((quiz: Quiz) => (
         <QuizCard
           key={quiz._id}
           quiz={quiz}
