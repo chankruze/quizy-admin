@@ -5,10 +5,7 @@ Created: Fri Apr 15 2022 14:39:02 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import useSWR from "swr";
 import Router from "next/router";
-import { fetcher } from "../../../utils/fetcher";
-import { useRouter } from "next/router";
 import axios from "axios";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
@@ -26,7 +23,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { MdAdd, MdDelete } from "react-icons/md";
 // data
 import { branches, semesters } from "../../../config/academicData";
-import { Option, Question } from "../../../types/quiz";
+// types
+import { Quiz } from "../../../types/quiz";
+import { NextPageContext } from "next";
 
 const optionData = [
   {
@@ -76,17 +75,12 @@ const questionData = {
   answer: "",
 };
 
-const Edit = () => {
-  const router = useRouter();
-  const { id } = router.query;
+interface EditQuizProps {
+  quiz: Quiz;
+}
 
-  const { data: quiz, error } = useSWR(
-    id ? `${process.env.NEXT_PUBLIC_API_URL}/quiz/${id}` : null,
-    fetcher,
-  );
-
-  if (error) return <div>failed to load</div>;
-  if (!quiz) return <div>loading...</div>;
+const EditQuiz = ({ quiz }: EditQuizProps) => {
+  if (!quiz) return <div>failed to load quiz</div>;
 
   // initial values (form db)
   const initialValues = { ...quiz, date: new Date(quiz.date) };
@@ -117,16 +111,9 @@ const Edit = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (values: FormikValues, formikBag: any) => {
     axios
-      .put(`${process.env.NEXT_PUBLIC_API_URL}/quiz/${id}`, {
+      .put(`${process.env.NEXT_PUBLIC_API_URL}/quiz/${quiz._id}`, {
         ...values,
-        questions: values.questions.map((question: Question) => ({
-          ...question,
-          options: question.options.map((option: Option) => ({
-            ...option,
-            id: nanoid(),
-          })),
-          id: nanoid(),
-        })),
+        questionsCount: values.questions.length,
       })
       .then((res) => {
         if (res.status === 200) {
@@ -138,13 +125,21 @@ const Edit = () => {
           setTimeout(() => {
             formikBag.setSubmitting(false);
             formikBag.resetForm();
-            Router.reload();
             Router.push("/quiz");
           }, 1000);
         }
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Quiz can't be saved!", {
+          theme: "colored",
+          autoClose: 1000,
+        });
+        // dont't wait for swr to update
+        setTimeout(() => {
+          formikBag.setSubmitting(false);
+          formikBag.resetForm();
+        }, 1000);
       });
   };
 
@@ -257,7 +252,16 @@ const Edit = () => {
                     {/* (button) add new question */}
                     <button
                       type="button"
-                      onClick={() => arrayHelpers.push(questionData)}
+                      onClick={() =>
+                        arrayHelpers.push({
+                          ...questionData,
+                          id: nanoid(),
+                          options: optionData.map((option) => ({
+                            ...option,
+                            id: nanoid(),
+                          })),
+                        })
+                      }
                       className="mt-2 py-2 px-4 text-lg b-0 flex justify-center items-center bg-green-600
                     text-white rounded cursor-poiner ml-auto transition duration-200 ease-in-out hover:bg-green-600/90"
                     >
@@ -287,4 +291,24 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export async function getServerSideProps(context: NextPageContext) {
+  const { id } = context.query;
+  let quiz: Quiz | null = null;
+
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/quiz/${id}`,
+    );
+    quiz = data;
+  } catch (err) {
+    console.log(err);
+  }
+
+  return {
+    props: {
+      quiz,
+    },
+  };
+}
+
+export default EditQuiz;
