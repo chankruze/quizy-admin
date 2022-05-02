@@ -7,14 +7,16 @@ Copyright (c) geekofia 2022 and beyond
 
 import { useState } from "react";
 import useSWR from "swr";
-import { Quiz } from "../../types/quiz";
+import { MinifiedQuiz, Quiz } from "../../types/quiz";
 import { fetcher } from "../../utils/fetcher";
 import QuizCard from "./QuizCard";
 
 const QuizzesList = () => {
-  const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
+  const [selectedQuiz, setSelectedQuiz] = useState<MinifiedQuiz | null>(
+    null,
+  );
 
-  const handleQuizClick = (quiz: Quiz) => {
+  const handleQuizClick = (quiz: MinifiedQuiz) => {
     setSelectedQuiz(quiz);
   };
 

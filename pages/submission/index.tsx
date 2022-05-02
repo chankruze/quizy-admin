@@ -9,13 +9,12 @@ import Router from "next/router";
 import useSWR from "swr";
 import QuizListItem from "../../components/common/QuizListItem";
 import RefreshIndicator from "../../components/common/RefreshIndicator";
-import Spinner from "../../components/common/Spinner";
 import { MinifiedQuiz } from "../../types/quiz";
 import { fetcher } from "../../utils/fetcher";
 
 const Submission = () => {
   const { data, isValidating } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}/quiz/all/minified`,
+    `${process.env.NEXT_PUBLIC_API_URL}/quiz/all`,
     fetcher,
   );
 

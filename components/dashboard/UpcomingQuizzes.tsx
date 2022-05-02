@@ -7,9 +7,8 @@ Copyright (c) geekofia 2022 and beyond
 
 import React from "react";
 import useSWR from "swr";
-import { MinifiedQuiz, Quiz } from "../../types/quiz";
+import { MinifiedQuiz } from "../../types/quiz";
 import { fetcher } from "../../utils/fetcher";
-import moment from "moment";
 import Spinner from "../common/Spinner";
 import QuizListItem from "../common/QuizListItem";
 

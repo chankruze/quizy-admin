@@ -12,8 +12,8 @@ import { MinifiedQuiz, Quiz } from "../../types/quiz";
 import ActionButton from "../ActionButton";
 
 interface QuizCardProps {
-  quiz: Quiz | MinifiedQuiz;
-  onClick: (quiz: Quiz | MinifiedQuiz) => void;
+  quiz: MinifiedQuiz;
+  onClick: (quiz: MinifiedQuiz) => void;
   selected: boolean;
 }
 
