@@ -16,11 +16,15 @@ interface Props {
 const ActionButton: React.FC<Props> = (props) => {
   return (
     <div
-      className="flex flex-wrap items-center cursor-pointer gap-1 hover:opacity-70"
+      className="flex flex-wrap items-center cursor-pointer gap-1 hover:opacity-50"
       onClick={props.onClick}
     >
       {props.icon && <props.icon size={20} />}
-      {props.label && <p>{props.label}</p>}
+      {props.label && (
+        <p className="uppercase text-xs font-medium font-poppins">
+          {props.label}
+        </p>
+      )}
     </div>
   );
 };

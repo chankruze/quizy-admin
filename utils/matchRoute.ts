@@ -8,5 +8,5 @@ Copyright (c) geekofia 2022 and beyond
 import Router from "next/router";
 
 export const isActive = (link: string) => {
-  return Router.pathname === link || Router.pathname.includes(link);
+  return Router.pathname.split("/")[1] === link.split("/")[1];
 };

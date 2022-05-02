@@ -8,10 +8,9 @@ Copyright (c) geekofia 2022 and beyond
 import Link from "next/link";
 import { config } from "../../config";
 import React, { useEffect, useState } from "react";
-import { GoFlame } from "react-icons/go";
+import { SiVercel } from "react-icons/si";
 import navLinks from "../../config/navLinks";
 import { userService } from "../../services";
-import { isActive } from "../../utils";
 import NavLink from "./NavLink";
 
 const NavBar = () => {
@@ -27,12 +26,12 @@ const NavBar = () => {
     <nav className="w-full h-16 flex justify-between p-2 sm:px-4 sm:border-b border-gray-100">
       <div className="flex flex-1 justify-center lg:flex-auto lg:justify-start gap-1">
         <Link href="/" passHref>
-          <p className="font-bold font-poppins text-3xl flex items-center cursor-pointer">
-            <GoFlame size={32} color="#F07548" />
-            <a className="ml-1 text-green-500">{config.APP_NAME}</a>
+          <p className="font-bold font-poppins text-3xl flex items-center cursor-pointer text-blue-500">
+            <SiVercel size={32} />
+            <a className="ml-1">{config.APP_NAME}</a>
           </p>
         </Link>
-        <p className="self-end text-xs text-yellow-500 font-nunito italic hidden sm:block">
+        <p className="self-end text-xs font-nunito italic hidden sm:block">
           <span>v</span>
           {config.APP_VERSION}
         </p>

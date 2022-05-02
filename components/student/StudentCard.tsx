@@ -9,7 +9,7 @@ import axios from "axios";
 import Router from "next/router";
 import { MdCheck, MdClear } from "react-icons/md";
 import { Student } from "../../types/student";
-import ActionButton from "../ActionButton";
+import ActionButton from "../common/ActionButton";
 import BranchBadge from "./BranchBadge";
 import VerificationBadge from "./VerificationBadge";
 

@@ -7,7 +7,7 @@ Copyright (c) geekofia 2022 and beyond
 
 import { useState } from "react";
 import useSWR from "swr";
-import { MinifiedQuiz, Quiz } from "../../types/quiz";
+import { MinifiedQuiz } from "../../types/quiz";
 import { fetcher } from "../../utils/fetcher";
 import QuizCard from "./QuizCard";
 
@@ -30,7 +30,7 @@ const QuizzesList = () => {
 
   return (
     <div>
-      {quizzes.map((quiz: Quiz) => (
+      {quizzes.map((quiz: MinifiedQuiz) => (
         <QuizCard
           key={quiz._id}
           quiz={quiz}

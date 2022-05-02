@@ -8,8 +8,8 @@ Copyright (c) geekofia 2022 and beyond
 import axios from "axios";
 import Router from "next/router";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { MinifiedQuiz, Quiz } from "../../types/quiz";
-import ActionButton from "../ActionButton";
+import { MinifiedQuiz } from "../../types/quiz";
+import ActionButton from "../common/ActionButton";
 
 interface QuizCardProps {
   quiz: MinifiedQuiz;

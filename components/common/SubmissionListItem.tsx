@@ -6,17 +6,26 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import moment from "moment";
+import { MdRemoveRedEye } from "react-icons/md";
 import useSWR from "swr";
+import { Question } from "../../types/quiz";
 import { MinifiedSubmission } from "../../types/submission";
 import { fetcher } from "../../utils/fetcher";
+import ActionButton from "./ActionButton";
 import Badge from "./Badge";
 
 interface SubmissionListItemProps {
   submission: MinifiedSubmission;
+  questions: Question[];
+  onClick: (submission: MinifiedSubmission) => void;
+  selected?: boolean;
 }
 
 const SubmissionListItem: React.FC<SubmissionListItemProps> = ({
   submission,
+  questions,
+  onClick,
+  selected,
 }) => {
   const { data: student, isValidating } = useSWR(
     submission
@@ -27,15 +36,29 @@ const SubmissionListItem: React.FC<SubmissionListItemProps> = ({
 
   return (
     <div
-      className="flex items-center p-3 border-b hover:bg-gray-100 cursor-pointer"
-      //   onClick={onClick ? () => onClick(quiz) : undefined}
+      className={`flex items-center p-3 border-b cursor-pointer ${
+        selected ? "bg-green-200" : "hover:bg-gray-100"
+      }`}
+      onClick={onClick ? () => onClick(submission) : undefined}
     >
       <div className="flex-1 flex items-center gap-2">
-        <Badge>{moment(submission.date).format("MMM DD YYYY, hh:mm A")}</Badge>
+        <Badge bgColor="bg-blue-500" color="text-white">
+          {moment(submission.date).format("MMM DD YYYY, hh:mm A")}
+        </Badge>
         {student ? (
-          <p className="font-poppins">{student.bioData.name}</p>
+          <>
+            <Badge bgColor="bg-gray-600" color="text-white">
+              {student.bioData.regdNo}
+            </Badge>
+            <p className="font-poppins">{student.bioData.name}</p>
+          </>
         ) : (
           <p className="font-poppins animate-bounce">...</p>
+        )}
+        {selected && (
+          <div className="flex gap-4 ml-auto">
+            <ActionButton icon={MdRemoveRedEye} label="view" />
+          </div>
         )}
       </div>
     </div>

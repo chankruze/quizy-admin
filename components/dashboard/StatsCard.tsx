@@ -36,9 +36,9 @@ const StatsCard: React.FC<Props> = ({ title, dataUrl, color, bg }) => {
         bg ? bg : "bg-gradient-to-bl from-green-400 to-blue-500"
       }`}
     >
-      <p className={`text-6xl font-bold ${color ? color : "text-white"}`}>
+      <div className={`text-6xl font-bold ${color ? color : "text-white"}`}>
         {isValidating ? <p className="animate-bounce">...</p> : count}
-      </p>
+      </div>
       <p className="capitalize text-lg pt-2 font text-white">{title}</p>
     </div>
   );

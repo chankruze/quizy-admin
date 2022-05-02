@@ -26,6 +26,7 @@ export type Quiz = {
   semester: string;
   date: string;
   questions: Array<Question>;
+  questionsCount?: number;
 };
 
 export type MinifiedQuiz = {
@@ -34,4 +35,5 @@ export type MinifiedQuiz = {
   branch: string;
   semester: string;
   date: string;
+  questionsCount: number;
 };
