@@ -118,6 +118,7 @@ const NewQuiz = () => {
           })),
           id: nanoid(),
         })),
+        questionsCount: values.questions.length,
       })
       .then((res) => {
         if (res.status === 201) {
@@ -128,6 +129,7 @@ const NewQuiz = () => {
           // dont't wait for swr to update
           setTimeout(() => {
             formikBag.setSubmitting(false);
+            formikBag.resetForm();
             Router.push("/quiz");
           }, 1000);
         }
