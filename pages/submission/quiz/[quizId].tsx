@@ -12,7 +12,7 @@ import SubmissionListItem from "../../../components/common/SubmissionListItem";
 import { MinifiedSubmission } from "../../../types/submission";
 import { useState } from "react";
 import IconButton from "../../../components/common/IconButton";
-import { MdChevronLeft, MdDownload } from "react-icons/md";
+import { MdDownload } from "react-icons/md";
 import { NextPageContext } from "next";
 import axios from "axios";
 import { Quiz } from "../../../types/quiz";

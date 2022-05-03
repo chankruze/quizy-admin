@@ -29,4 +29,5 @@ export type Result = {
   regdNo: string;
   score: number;
   submissionDate: string;
+  [key: string]: string | number;
 };
