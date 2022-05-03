@@ -23,3 +23,10 @@ export type Submission = {
   answers: Answer;
   date: string;
 };
+
+export type Result = {
+  name: string;
+  regdNo: string;
+  score: number;
+  submissionDate: string;
+};

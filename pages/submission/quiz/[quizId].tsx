@@ -12,10 +12,11 @@ import SubmissionListItem from "../../../components/common/SubmissionListItem";
 import { MinifiedSubmission } from "../../../types/submission";
 import { useState } from "react";
 import IconButton from "../../../components/common/IconButton";
-import { MdDownload } from "react-icons/md";
+import { MdChevronLeft, MdDownload } from "react-icons/md";
 import { NextPageContext } from "next";
 import axios from "axios";
 import { Quiz } from "../../../types/quiz";
+import { downloadSubmissions } from "../../../utils";
 
 interface Props {
   quiz: Quiz;
@@ -27,7 +28,7 @@ const QuizSubmissions = ({ quiz }: Props) => {
 
   const { data, isValidating } = useSWR(
     quiz
-      ? `${process.env.NEXT_PUBLIC_API_URL}/submission/quiz/${quiz._id}`
+      ? `${process.env.NEXT_PUBLIC_API_URL}/submission/quiz/${quiz._id}/minified`
       : null,
     fetcher,
   );
@@ -42,8 +43,8 @@ const QuizSubmissions = ({ quiz }: Props) => {
     <div>
       {/* modal */}
       {/* header */}
-      <div className="py-2 flex justify-between">
-        <div>
+      <div className="py-2 flex">
+        <div className="flex-1">
           <p className="text-xs font-nunito uppercase text-gray-400 font-semibold">
             All submissions
           </p>
@@ -52,15 +53,19 @@ const QuizSubmissions = ({ quiz }: Props) => {
           </p>
         </div>
         <div className="flex items-center">
-          <IconButton btnType="success">
-            <MdDownload size={24} />
-            <span className="font-nunito">download all</span>
-          </IconButton>
+          {data && data.length > 0 && (
+            <IconButton
+              btnType="success"
+              onClick={() => downloadSubmissions(quiz)}
+            >
+              <MdDownload size={24} />
+              <span className="font-nunito">download PDF</span>
+            </IconButton>
+          )}
         </div>
       </div>
       {/* list all submissions */}
-      {data &&
-        data.length > 0 &&
+      {data && data.length > 0 ? (
         data.map((submission: MinifiedSubmission) => (
           <SubmissionListItem
             key={submission._id}
@@ -69,7 +74,14 @@ const QuizSubmissions = ({ quiz }: Props) => {
             submission={submission}
             questions={quiz && quiz.questions}
           />
-        ))}
+        ))
+      ) : (
+        <div className="text-center text-gray-500">
+          <p className="p-10 text-lg font-poppins font-medium">
+            No submissions yet
+          </p>
+        </div>
+      )}
       {/* refresh indicator */}
       {isValidating && <RefreshIndicator />}
     </div>

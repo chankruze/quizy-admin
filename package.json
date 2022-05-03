@@ -12,6 +12,7 @@
     "@types/react-table": "^7.7.11",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
+    "html2pdf.js": "^0.9.3",
     "moment": "^2.29.3",
     "next": "12.1.0",
     "nextjs-progressbar": "^0.0.14",

@@ -7,7 +7,7 @@ Copyright (c) geekofia 2022 and beyond
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   btnType: "primary" | "secondary" | "danger" | "warning" | "success";
-  onClick?: () => void;
+  onClick?: any;
   border?: boolean;
 }
 

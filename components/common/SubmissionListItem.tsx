@@ -50,6 +50,8 @@ const SubmissionListItem: React.FC<SubmissionListItemProps> = ({
             <Badge bgColor="bg-gray-600" color="text-white">
               {student.bioData.regdNo}
             </Badge>
+            <Badge bgColor="bg-yellow-400">{student.bioData.semester}</Badge>
+            <Badge bgColor="bg-green-400">{student.bioData.branch}</Badge>
             <p className="font-poppins">{student.bioData.name}</p>
           </>
         ) : (
