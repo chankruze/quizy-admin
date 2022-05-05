@@ -44,7 +44,7 @@ export const downloadSubmissions = async (quiz: Quiz) => {
 
   // for each submission, get the student details,
   // and then get the answers for each question
-  const results = await Promise.all(
+  const results: Result[] = await Promise.all(
     submissions.map(async (submission: Submission) => {
       // the student details
       const { data: student } = await axios.get(
@@ -101,4 +101,8 @@ export const downloadSubmissions = async (quiz: Quiz) => {
   //   const html2pdf = require("html2pdf.js");
   //   html2pdf().from(html).set(options).save();
   // }
+};
+
+export const padding = (str: string, length: number) => {
+  return str.padStart(length, "0");
 };

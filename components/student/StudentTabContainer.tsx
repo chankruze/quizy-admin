@@ -9,6 +9,7 @@ import { TAB_TYPE } from "../../config/tabs";
 import { Tab } from "../../types/tab";
 import PendingTab from "./PendingTab";
 import VerifiedTab from "./VerifiedTab";
+import RejectedTab from "./RejectedTab";
 
 interface TabProps {
   tab: Tab;
@@ -21,6 +22,9 @@ const StudentTabContainer: React.FC<TabProps> = ({ tab }) => {
 
     case TAB_TYPE.TAB_STUDENT_PENDING:
       return <PendingTab />;
+
+    case TAB_TYPE.TAB_STUDENT_REJECTED:
+      return <RejectedTab />;
 
     default:
       return <VerifiedTab />;

@@ -5,15 +5,15 @@ Created: Mon Apr 11 2022 16:55:57 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import axios from "axios";
-import Router from "next/router";
 import { MdCheck, MdClear } from "react-icons/md";
 import { Student } from "../../types/student";
+import { padding } from "../../utils";
+import { handleVerificationClick } from "../../utils/handlers";
 import ActionButton from "../common/ActionButton";
 import BranchBadge from "./BranchBadge";
-import VerificationBadge from "./VerificationBadge";
 
 interface Props {
+  index: number;
   student: Student;
   onClick: (student: Student) => void;
   selected: boolean;
@@ -22,55 +22,64 @@ interface Props {
 }
 
 const StudentCard: React.FC<Props> = ({
+  index,
   student,
   onClick,
   selected,
-  verificationBadge,
   showActions,
 }) => {
   const { bioData } = student;
 
-  const handleVerificationClick = async (status: string) => {
-    await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/student/${student._id}/verification/${status}`,
-    );
-    Router.reload();
-  };
-
   return (
     <div
-      className={`flex items-center p-3 border-b ${selected && "bg-green-100"}`}
+      className={`flex items-center p-2 border-b ${selected && "bg-green-100"}`}
       onClick={() => onClick(student)}
     >
-      <div className="flex-1 flex justify-between">
+      <div className="flex-1 flex">
         <div className="flex items-center gap-2">
+          <p className="text-gray-400 font-mono">
+            {padding(index.toString(), 3)}
+          </p>
           {/* regd. no. */}
-          <p className="bg-yellow-100 px-2 rounded-md font-medium">
+          <p className="bg-yellow-100 px-2 rounded-md font-medium font-mono">
             {bioData.regdNo}
           </p>
-          {/* branch */}
-          <BranchBadge branch={bioData.branch} />
           {/* name */}
           <p className="font-poppins">{bioData.name}</p>
+          {/* branch */}
+          <BranchBadge branch={bioData.branch} />
         </div>
         {/* verification */}
-        {verificationBadge && (
+        {/* {verificationBadge && (
           <VerificationBadge verification={student.verification} />
-        )}
+        )} */}
       </div>
       {/* actions menu (if selected) */}
       {selected && showActions && (
         <div className="flex gap-4">
-          <ActionButton
-            icon={MdClear}
-            label="Reject"
-            onClick={() => handleVerificationClick("rejected")}
-          />
-          <ActionButton
-            icon={MdCheck}
-            label="Approve"
-            onClick={() => handleVerificationClick("verified")}
-          />
+          {/* if pending show approve and reject */}
+          {/* if verified show only reject */}
+          {(student.verification === "verified" ||
+            student.verification === "pending") && (
+            <ActionButton
+              icon={MdClear}
+              label="Reject"
+              onClick={() =>
+                handleVerificationClick(student._id as string, "rejected")
+              }
+            />
+          )}
+          {/* if rejected show only approve */}
+          {(student.verification === "rejected" ||
+            student.verification === "pending") && (
+            <ActionButton
+              icon={MdCheck}
+              label="Approve"
+              onClick={() =>
+                handleVerificationClick(student._id as string, "verified")
+              }
+            />
+          )}
         </div>
       )}
     </div>

@@ -12,7 +12,7 @@ interface Props {
 const VerificationBadge = ({ verification }: Props) => {
   return (
     <p
-      className={`m-auto w-min uppercase text-xs px-2 py-1 rounded-md 
+      className={`w-min uppercase text-xs px-2 py-1 rounded-md 
     text-white ${verification === "verified" ? "bg-green-500" : "bg-red-500"}`}
     >
       {verification}

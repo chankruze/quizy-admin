@@ -23,7 +23,7 @@ interface Props {
 const BranchBadge = ({ branch }: Props) => {
   return (
     <p
-      className={`px-2 rounded-md font-nunito text-sm ${colors[branch]}`}
+      className={`px-2 rounded-md font-nunito text-xs ${colors[branch]}`}
     >
       {branch}
     </p>
