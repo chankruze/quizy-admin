@@ -6,12 +6,16 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import React, { useState } from "react";
-import { GoCheck } from "react-icons/go";
 import useSWR from "swr";
-import { Student } from "../../types/student";
-import { fetcher } from "../../utils/fetcher";
-import Spinner from "../common/Spinner";
-import StudentCard from "./StudentCard";
+import { fetcher } from "../../../utils";
+// components
+import Spinner from "../../common/Spinner";
+import StudentCard from "../StudentCard";
+// icons
+import { GoCheck } from "react-icons/go";
+// types
+import { Student } from "../../../types/student";
+
 
 const PendingTab = () => {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);

@@ -6,7 +6,6 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import useSWR from "swr";
-import { fetcher } from "../../../utils/fetcher";
 import RefreshIndicator from "../../../components/common/RefreshIndicator";
 import SubmissionListItem from "../../../components/common/SubmissionListItem";
 import { MinifiedSubmission } from "../../../types/submission";
@@ -16,7 +15,7 @@ import { MdDownload } from "react-icons/md";
 import { NextPageContext } from "next";
 import axios from "axios";
 import { Quiz } from "../../../types/quiz";
-import { downloadSubmissions } from "../../../utils";
+import { fetcher, downloadSubmissionsCSV } from "../../../utils";
 
 interface Props {
   quiz: Quiz;
@@ -56,7 +55,7 @@ const QuizSubmissions = ({ quiz }: Props) => {
           {data && data.length > 0 && (
             <IconButton
               btnType="success"
-              onClick={() => downloadSubmissions(quiz)}
+              onClick={() => downloadSubmissionsCSV(quiz)}
             >
               <MdDownload size={24} />
               <span className="font-nunito">download PDF</span>

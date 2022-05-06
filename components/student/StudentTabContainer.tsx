@@ -7,9 +7,9 @@ Copyright (c) geekofia 2022 and beyond
 
 import { TAB_TYPE } from "../../config/tabs";
 import { Tab } from "../../types/tab";
-import PendingTab from "./PendingTab";
-import VerifiedTab from "./VerifiedTab";
-import RejectedTab from "./RejectedTab";
+import PendingTab from "./tabs/PendingTab";
+import VerifiedTab from "./tabs/VerifiedTab";
+import RejectedTab from "./tabs/RejectedTab";
 
 interface TabProps {
   tab: Tab;

@@ -7,17 +7,15 @@ Copyright (c) geekofia 2022 and beyond
 
 import { MdCheck, MdClear } from "react-icons/md";
 import { Student } from "../../types/student";
-import { padding } from "../../utils";
-import { handleVerificationClick } from "../../utils/handlers";
+import { padding, handleVerificationClick } from "../../utils";
 import ActionButton from "../common/ActionButton";
-import BranchBadge from "./BranchBadge";
+import StudentBadge from "./StudentBadge";
 
 interface Props {
   index: number;
   student: Student;
   onClick: (student: Student) => void;
   selected: boolean;
-  verificationBadge?: boolean;
   showActions?: boolean;
 }
 
@@ -32,7 +30,8 @@ const StudentCard: React.FC<Props> = ({
 
   return (
     <div
-      className={`flex items-center p-2 border-b ${selected && "bg-green-100"}`}
+      className={`flex items-center p-2 border-b cursor-pointer
+      ${selected && "bg-sky-100"}`}
       onClick={() => onClick(student)}
     >
       <div className="flex-1 flex">
@@ -47,7 +46,9 @@ const StudentCard: React.FC<Props> = ({
           {/* name */}
           <p className="font-poppins">{bioData.name}</p>
           {/* branch */}
-          <BranchBadge branch={bioData.branch} />
+          <StudentBadge data={bioData.branch} />
+          {/* semester */}
+          <StudentBadge data={bioData.semester} />
         </div>
         {/* verification */}
         {/* {verificationBadge && (
