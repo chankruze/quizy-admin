@@ -10,13 +10,15 @@ import { IconType } from "react-icons";
 interface Props {
   icon?: IconType;
   label?: string;
-  onClick?: () => void;
+  onClick?: (x: any) => any;
+  color?: string;
 }
 
 const ActionButton: React.FC<Props> = (props) => {
   return (
     <div
-      className="flex flex-wrap items-center cursor-pointer gap-1 hover:opacity-50"
+      className={`flex flex-wrap items-center cursor-pointer gap-1 hover:opacity-60
+      ${props.color && props.color}`}
       onClick={props.onClick}
     >
       {props.icon && <props.icon size={20} />}
