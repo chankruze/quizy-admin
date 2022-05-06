@@ -7,8 +7,9 @@ Copyright (c) geekofia 2022 and beyond
 
 import axios from "axios";
 import Router from "next/router";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdMail } from "react-icons/md";
 import { MinifiedQuiz } from "../../types/quiz";
+import { notifyStudents } from "../../utils";
 import ActionButton from "../common/ActionButton";
 
 interface QuizCardProps {
@@ -34,7 +35,9 @@ const QuizCard: React.FC<QuizCardProps> = ({ quiz, onClick, selected }) => {
 
   return (
     <div
-      className={`flex items-center p-3 border-b ${selected && "bg-green-100"}`}
+      className={`flex items-center p-3 border-b cursor-pointer ${
+        selected && "bg-green-100"
+      }`}
       onClick={() => onClick(quiz)}
     >
       <div className="flex-1 flex items-center gap-2">
@@ -53,8 +56,20 @@ const QuizCard: React.FC<QuizCardProps> = ({ quiz, onClick, selected }) => {
             icon={MdDelete}
             label="Delete"
             onClick={handleDeleteClick}
+            color="text-red-500"
           />
-          <ActionButton icon={MdEdit} label="Edit" onClick={handleEditClick} />
+          <ActionButton
+            icon={MdMail}
+            label="Notify students"
+            onClick={() => notifyStudents(quiz._id)}
+            color="text-blue-500"
+          />
+          <ActionButton
+            icon={MdEdit}
+            label="Edit"
+            onClick={handleEditClick}
+            color="text-gray-500"
+          />
         </div>
       )}
     </div>

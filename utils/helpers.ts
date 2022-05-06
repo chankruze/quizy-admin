@@ -113,7 +113,5 @@ export const padding = (str: string, length: number) => {
 
 export const notifyStudents = async (quizId: string) => {
   // send a notification to all students by email
-  await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/notification/quiz/${quizId}`,
-  );
+  await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/quiz/${quizId}/notify`);
 };
