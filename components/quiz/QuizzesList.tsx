@@ -17,7 +17,7 @@ const QuizzesList = () => {
   const [selectedQuiz, setSelectedQuiz] = useState<MinifiedQuiz | null>(null);
 
   const handleQuizClick = (quiz: MinifiedQuiz) => {
-    setSelectedQuiz(quiz);
+    setSelectedQuiz((prev) => (!prev || prev._id !== quiz._id ? quiz : null));
   };
 
   const {
