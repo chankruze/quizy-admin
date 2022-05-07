@@ -115,3 +115,8 @@ export const notifyStudents = async (quizId: string) => {
   // send a notification to all students by email
   await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/quiz/${quizId}/notify`);
 };
+
+export const deleteStudent = async (studentId: string) => {
+  await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/student/${studentId}`);
+  mutate(`${process.env.NEXT_PUBLIC_API_URL}/student/all/verification/rejected`);
+};

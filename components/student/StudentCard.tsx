@@ -7,7 +7,7 @@ Copyright (c) geekofia 2022 and beyond
 
 import { MdCheck, MdClear } from "react-icons/md";
 import { Student } from "../../types/student";
-import { padding, handleVerificationClick } from "../../utils";
+import { padding, handleVerificationClick, deleteStudent } from "../../utils";
 import ActionButton from "../common/ActionButton";
 import StudentBadge from "./StudentBadge";
 
@@ -65,6 +65,7 @@ const StudentCard: React.FC<Props> = ({
             <ActionButton
               icon={MdClear}
               label="Reject"
+              color="text-red-500"
               onClick={() =>
                 handleVerificationClick(student._id as string, "rejected")
               }
@@ -76,9 +77,19 @@ const StudentCard: React.FC<Props> = ({
             <ActionButton
               icon={MdCheck}
               label="Approve"
+              color="text-green-500"
               onClick={() =>
                 handleVerificationClick(student._id as string, "verified")
               }
+            />
+          )}
+          {/* if rejected also show delete button */}
+          {student.verification === "rejected" && (
+            <ActionButton
+              icon={MdClear}
+              label="Delete"
+              color="text-red-500"
+              onClick={() => deleteStudent(student._id as string)}
             />
           )}
         </div>
