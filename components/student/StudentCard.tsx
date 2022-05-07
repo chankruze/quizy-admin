@@ -5,7 +5,7 @@ Created: Mon Apr 11 2022 16:55:57 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import { MdCheck, MdClear } from "react-icons/md";
+import { MdCheck, MdClear, MdVisibility } from "react-icons/md";
 import { Student } from "../../types/student";
 import { padding, handleVerificationClick, deleteStudent } from "../../utils";
 import ActionButton from "../common/ActionButton";
@@ -27,6 +27,10 @@ const StudentCard: React.FC<Props> = ({
   showActions,
 }) => {
   const { bioData } = student;
+
+  const viewBioData = () => {
+    console.log(student);
+  };
 
   return (
     <div
@@ -62,14 +66,22 @@ const StudentCard: React.FC<Props> = ({
           {/* if verified show only reject */}
           {(student.verification === "verified" ||
             student.verification === "pending") && (
-            <ActionButton
-              icon={MdClear}
-              label="Reject"
-              color="text-red-500"
-              onClick={() =>
-                handleVerificationClick(student._id as string, "rejected")
-              }
-            />
+            <>
+              <ActionButton
+                icon={MdVisibility}
+                label="bio-data"
+                color="text-blue-500"
+                onClick={viewBioData}
+              />
+              <ActionButton
+                icon={MdClear}
+                label="Reject"
+                color="text-red-500"
+                onClick={() =>
+                  handleVerificationClick(student._id as string, "rejected")
+                }
+              />
+            </>
           )}
           {/* if rejected show only approve */}
           {(student.verification === "rejected" ||
