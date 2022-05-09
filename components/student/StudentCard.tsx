@@ -10,6 +10,8 @@ import { Student } from "../../types/student";
 import { padding, handleVerificationClick, deleteStudent } from "../../utils";
 import ActionButton from "../common/ActionButton";
 import StudentBadge from "./StudentBadge";
+import { useState } from "react";
+import StudentModal from "./StudentModal";
 
 interface Props {
   index: number;
@@ -27,10 +29,10 @@ const StudentCard: React.FC<Props> = ({
   showActions,
 }) => {
   const { bioData } = student;
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const viewBioData = () => {
-    console.log(student);
-  };
+  const closeModal = () => setModalIsOpen(false);
+  const viewBioData = () => setModalIsOpen(true);
 
   return (
     <div
@@ -38,6 +40,11 @@ const StudentCard: React.FC<Props> = ({
       ${selected && "bg-sky-100"}`}
       onClick={() => onClick(student)}
     >
+      <StudentModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        student={student}
+      />
       <div className="flex-1 flex">
         <div className="flex items-center gap-2">
           <p className="text-gray-400 font-mono">

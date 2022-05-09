@@ -18,6 +18,7 @@ export type BioData = {
   caste: string;
   mob: string;
   fatherMob: string;
+  [key: string]: string | number | boolean | undefined;
 };
 
 export type Student = {
