@@ -5,7 +5,7 @@ Created: Sat Apr 30 2022 14:21:35 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../../utils";
 // components
@@ -15,9 +15,27 @@ import StudentCard from "../StudentCard";
 import { FcDeleteDatabase } from "react-icons/fc";
 // types
 import { Student } from "../../../types/student";
+import { branches, semesters } from "../../../config/academicData";
+import { FilterType, SortType } from "../../../types/filter";
+import { filterSort } from "../../../helpers/filter-sort";
+import SelectBox from "../../common/SelectBox";
 
 const VerifiedTab = () => {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+
+  const [filter, setFilter] = useState<FilterType>({
+    branch: "",
+    semester: "",
+  });
+
+  const [sortby, setSortby] = useState<SortType>({
+    field: "",
+    order: "ASC",
+  });
+
+  const [filteredAndSortedStudents, setFilteredAndSortedStudents] = useState<
+    Student[]
+  >([]);
 
   const handleStudentClick = (student: Student) => {
     setSelectedStudent((prev) =>
@@ -30,12 +48,65 @@ const VerifiedTab = () => {
     fetcher,
   );
 
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFilter((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setSortby((prev) => ({ ...prev, [name]: value }));
+  };
+
+  useEffect(() => {
+    if (students) {
+      setFilteredAndSortedStudents([...filterSort(students, filter, sortby)]);
+    }
+  }, [students, sortby, filter]);
+
   return (
     <div className="w-full">
-      {/* TODo: sort, search options */}
+      {/* TODO: sort, search options */}
+      <div className="p-2 border-b bg-gray-50 flex items-center justify-between">
+        {/* filter by */}
+        <div>
+          <p className="py-1 text-xs uppercase font-nunito text-blue-500 font-semibold">
+            filter students
+          </p>
+          <div className="flex gap-2 items-center">
+            <SelectBox
+              name="branch"
+              options={branches}
+              onChange={handleFilterChange}
+            />
+            <SelectBox
+              name="semester"
+              options={semesters}
+              onChange={handleFilterChange}
+            />
+          </div>
+        </div>
+        {/* sort by */}
+        <div>
+          <p className="py-1 text-xs uppercase font-nunito text-blue-500 font-semibold">
+            sort students
+          </p>
+          <div>
+            <SelectBox
+              name="field"
+              options={[
+                { label: "Unsorted", value: "unsorted" },
+                { label: "Name", value: "name" },
+                { label: "Registration No.", value: "regdNo" },
+              ]}
+              onChange={handleSortChange}
+            />
+          </div>
+        </div>
+      </div>
       {/* list students */}
-      {students && students.length > 0 ? (
-        students.map((student: Student, _idx: number) => (
+      {filteredAndSortedStudents && filteredAndSortedStudents.length > 0 ? (
+        filteredAndSortedStudents.map((student: Student, _idx: number) => (
           <StudentCard
             key={student._id}
             index={_idx + 1}
