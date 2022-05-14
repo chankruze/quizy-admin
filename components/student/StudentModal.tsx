@@ -6,9 +6,11 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import moment from "moment";
-import { MdClose } from "react-icons/md";
+import { MdCheck, MdClear, MdClose } from "react-icons/md";
 import Modal from "react-modal";
 import { Student } from "../../types/student";
+import { deleteStudent, handleVerificationClick } from "../../utils";
+import ActionButton from "../common/ActionButton";
 
 interface Props {
   student: Student;
@@ -70,7 +72,42 @@ const StudentModal: React.FC<Props> = ({
           </table>
         </div>
         {/* actions */}
-        <div></div>
+        <div className="flex gap-4 justify-end p-3">
+          {/* if pending show approve and reject */}
+          {/* if verified show only reject */}
+          {(student.verification === "verified" ||
+            student.verification === "pending") && (
+            <ActionButton
+              icon={MdClear}
+              label="Reject"
+              color="text-red-500"
+              onClick={() =>
+                handleVerificationClick(student._id as string, "rejected")
+              }
+            />
+          )}
+          {/* if rejected show only approve */}
+          {(student.verification === "rejected" ||
+            student.verification === "pending") && (
+            <ActionButton
+              icon={MdCheck}
+              label="Approve"
+              color="text-green-500"
+              onClick={() =>
+                handleVerificationClick(student._id as string, "verified")
+              }
+            />
+          )}
+          {/* if rejected also show delete button */}
+          {student.verification === "rejected" && (
+            <ActionButton
+              icon={MdClear}
+              label="Delete"
+              color="text-red-500"
+              onClick={() => deleteStudent(student._id as string)}
+            />
+          )}
+        </div>
       </div>
     </Modal>
   );

@@ -104,12 +104,20 @@ const StudentCard: React.FC<Props> = ({
           )}
           {/* if rejected also show delete button */}
           {student.verification === "rejected" && (
-            <ActionButton
-              icon={MdClear}
-              label="Delete"
-              color="text-red-500"
-              onClick={() => deleteStudent(student._id as string)}
-            />
+            <>
+              <ActionButton
+                icon={MdVisibility}
+                label="bio-data"
+                color="text-blue-500"
+                onClick={viewBioData}
+              />
+              <ActionButton
+                icon={MdClear}
+                label="Delete"
+                color="text-red-500"
+                onClick={() => deleteStudent(student._id as string)}
+              />
+            </>
           )}
         </div>
       )}
