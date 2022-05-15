@@ -8,11 +8,11 @@ Copyright (c) geekofia 2022 and beyond
 import { Question } from "../types/quiz";
 import { Answer } from "../types/submission";
 
-export const calculateScore = (questions: Array<Question>, answers: Answer) => {
+export const calculateScore = (questions: Array<Question>, answer: Answer) => {
   return questions.reduce((prev, question: Question) => {
     if (
       question.options[parseInt(question.answer as string)].id ===
-      answers[question.id]
+      answer[question.id]
     ) {
       return prev + 1;
     }

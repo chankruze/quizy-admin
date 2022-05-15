@@ -20,7 +20,7 @@ export type Submission = {
   _id?: string;
   quizId: string;
   studentId: string;
-  answers: Answer;
+  answer: Answer;
   date: string;
 };
 

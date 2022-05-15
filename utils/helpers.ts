@@ -47,7 +47,7 @@ export const downloadSubmissionsCSV = async (quiz: Quiz) => {
       return {
         name: student.bioData.name,
         regdNo: student.bioData.regdNo,
-        score: calculateScore(quiz.questions, submission.answers),
+        score: calculateScore(quiz.questions, submission.answer),
         submissionDate: moment(submission.date).format("DD/MM/YYYY HH:MM:SS"),
       };
     }),
