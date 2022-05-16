@@ -15,9 +15,14 @@ import StudentCard from "../StudentCard";
 import { GoCheck } from "react-icons/go";
 // types
 import { Student } from "../../../types/student";
+import FilterSortStudents from "../FilterSortStudents";
 
 const RejectedTab = () => {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+
+  const [filteredAndSortedStudents, setFilteredAndSortedStudents] = useState<
+    Student[]
+  >([]);
 
   const {
     data: students,
@@ -38,8 +43,14 @@ const RejectedTab = () => {
 
   return (
     <div className="w-full">
-      {students && students.length > 0 ? (
-        students.map((student: Student, _idx: number) => (
+      {/* sort, search options */}
+      <FilterSortStudents
+        students={students}
+        setFilteredAndSortedStudents={setFilteredAndSortedStudents}
+      />
+
+      {filteredAndSortedStudents && filteredAndSortedStudents.length > 0 ? (
+        filteredAndSortedStudents.map((student: Student, _idx: number) => (
           <StudentCard
             key={student._id}
             index={_idx + 1}
