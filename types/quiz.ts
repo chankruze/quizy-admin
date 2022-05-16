@@ -24,7 +24,8 @@ export type Quiz = {
   description: string;
   branch: string;
   semester: string;
-  date: string;
+  startDate: string;
+  endDate: string;
   questions: Array<Question>;
   questionsCount?: number;
 };
@@ -34,6 +35,7 @@ export type MinifiedQuiz = {
   title: string;
   branch: string;
   semester: string;
-  date: string;
+  startDate: string;
+  endDate: string;
   questionsCount: number;
 };

@@ -23,7 +23,7 @@ const Badge: React.FC<BadgeProps> = ({
 }) => {
   return (
     <p
-      className={`py-1 px-2 rounded-md font-nunito 
+      className={`flex items-center gap-1 py-1 px-2 rounded-md font-nunito 
       ${uppercase && "uppercase"}
       ${textSize ? textSize : "text-sm"}
       ${color && color}

@@ -79,7 +79,8 @@ const NewQuiz = () => {
     description: "",
     semester: "",
     branch: "",
-    date: new Date(),
+    startDate: new Date(),
+    endDate: new Date().setDate(new Date().getDate() + 1), // 24 hours from now
     questions: [questionData],
   };
 
@@ -88,7 +89,8 @@ const NewQuiz = () => {
     description: Yup.string().required("Description is required"),
     semester: Yup.string().required("Semester is required"),
     branch: Yup.string().required("Branch is required"),
-    date: Yup.string().required("Date is required"),
+    startDate: Yup.string().required("Start date is required"),
+    endDate: Yup.string().required("End date is required"),
     questions: Yup.array()
       .of(
         Yup.object({
@@ -135,6 +137,7 @@ const NewQuiz = () => {
         }
       })
       .catch((err) => {
+        console.log(err);
         toast.error("Quiz can't be added!", {
           theme: "colored",
           autoClose: 1000,
@@ -190,7 +193,17 @@ const NewQuiz = () => {
               />
             </div>
 
-            <DatePicker id="date" name="date" label="Test Date & Time" />
+            <div className="flex justify-between">
+              {/* quiz starting time */}
+              <DatePicker
+                id="startDate"
+                name="startDate"
+                label="Start Date & Time"
+              />
+
+              {/* quiz ending time */}
+              <DatePicker id="endDate" name="endDate" label="End Date & Time" />
+            </div>
 
             <Divider />
 

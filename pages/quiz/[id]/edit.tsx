@@ -83,7 +83,11 @@ const EditQuiz = ({ quiz }: EditQuizProps) => {
   if (!quiz) return <div>failed to load quiz</div>;
 
   // initial values (form db)
-  const initialValues = { ...quiz, date: new Date(quiz.date) };
+  const initialValues = {
+    ...quiz,
+    startDate: new Date(quiz.startDate),
+    endDate: new Date(quiz.endDate),
+  };
 
   // validate form
   const validationSchema = Yup.object({
@@ -91,7 +95,8 @@ const EditQuiz = ({ quiz }: EditQuizProps) => {
     description: Yup.string().required("Description is required"),
     semester: Yup.string().required("Semester is required"),
     branch: Yup.string().required("Branch is required"),
-    date: Yup.string().required("Date is required"),
+    startDate: Yup.string().required("Start date is required"),
+    endDate: Yup.string().required("End date is required"),
     questions: Yup.array()
       .of(
         Yup.object({
@@ -187,7 +192,17 @@ const EditQuiz = ({ quiz }: EditQuizProps) => {
               />
             </div>
 
-            <DatePicker id="date" name="date" label="Test Date & Time" />
+            <div className="flex justify-between">
+              {/* quiz starting time */}
+              <DatePicker
+                id="startDate"
+                name="startDate"
+                label="Start Date & Time"
+              />
+
+              {/* quiz ending time */}
+              <DatePicker id="endDate" name="endDate" label="End Date & Time" />
+            </div>
 
             <Divider />
 
