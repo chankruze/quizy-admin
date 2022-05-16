@@ -32,12 +32,12 @@ const QuizListItem: React.FC<QuizListItemProps> = ({ quiz, onClick }) => {
         {/* start date */}
         <Badge bgColor="bg-green-100">
           <FcCalendar size={24} />
-          {moment(quiz.startDate).format("MM-DD-YYYY, hh:mm A")}
+          {moment(quiz.startDate).format("DD-MM-YYYY, hh:mm A")}
         </Badge>
         {/* end date  */}
         <Badge bgColor="bg-red-100">
           <FcCalendar size={24} />
-          {moment(quiz.endDate).format("MM-DD-YYYY, hh:mm A")}
+          {moment(quiz.endDate).format("DD-MM-YYYY, hh:mm A")}
         </Badge>
         {/* semester */}
         <Badge bgColor="bg-yellow-100">{quiz.semester}</Badge>
