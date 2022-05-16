@@ -25,7 +25,7 @@ const Submission = () => {
   return (
     <div>
       {/* header */}
-      <div className="py-2 flex justify-between">
+      <div className="py-2 flex justify-between border-b">
         <div>
           <p className="text-xs font-nunito uppercase text-gray-400 font-semibold">
             click on a quiz to view submissions

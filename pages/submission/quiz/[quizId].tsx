@@ -42,7 +42,7 @@ const QuizSubmissions = ({ quiz }: Props) => {
     <div>
       {/* modal */}
       {/* header */}
-      <div className="py-2 flex">
+      <div className="py-2 flex border-b">
         <div className="flex-1">
           <p className="text-xs font-nunito uppercase text-gray-400 font-semibold">
             All submissions
@@ -58,7 +58,7 @@ const QuizSubmissions = ({ quiz }: Props) => {
               onClick={() => downloadSubmissionsCSV(quiz)}
             >
               <MdDownload size={24} />
-              <span className="font-nunito">download PDF</span>
+              <span className="font-nunito">download all (CSV)</span>
             </IconButton>
           )}
         </div>

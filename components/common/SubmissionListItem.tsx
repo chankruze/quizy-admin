@@ -42,16 +42,16 @@ const SubmissionListItem: React.FC<SubmissionListItemProps> = ({
       onClick={onClick ? () => onClick(submission) : undefined}
     >
       <div className="flex-1 flex items-center gap-2">
-        <Badge bgColor="bg-blue-500" color="text-white">
+        <Badge bgColor="bg-blue-100">
           {moment(submission.date).format("MMM DD YYYY, hh:mm A")}
         </Badge>
         {student ? (
           <>
-            <Badge bgColor="bg-gray-600" color="text-white">
+            <Badge bgColor="bg-pink-100">
               {student.bioData.regdNo}
             </Badge>
-            <Badge bgColor="bg-yellow-400">{student.bioData.semester}</Badge>
-            <Badge bgColor="bg-green-400">{student.bioData.branch}</Badge>
+            <Badge bgColor="bg-yellow-100">{student.bioData.semester}</Badge>
+            <Badge bgColor="bg-green-100">{student.bioData.branch}</Badge>
             <p className="font-poppins">{student.bioData.name}</p>
           </>
         ) : (
