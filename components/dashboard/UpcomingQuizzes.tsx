@@ -21,7 +21,7 @@ const UpcomingQuizzes = () => {
   return (
     <>
       <p className="font-montserrat font-semibold py-2 text-gray-500">
-        Upcoming Quizzes
+        Latest Quizzes
       </p>
       <div>
         {data &&

@@ -16,8 +16,15 @@ interface QuizListItemProps {
 }
 
 const QuizListItem: React.FC<QuizListItemProps> = ({ quiz, onClick }) => {
-  const isExpired = moment(quiz.endDate).isBefore(moment());
-  const isUpcoming = moment(quiz.endDate).isBefore(moment());
+  // expiry check
+  const isExpired =
+    moment(quiz.startDate).isBefore(moment()) &&
+    moment(quiz.endDate).isBefore(moment());
+  // upcoming check
+  const isUpcoming =
+    moment(quiz.startDate).isAfter(moment()) &&
+    moment(quiz.endDate).isAfter(moment());
+  // ongoing check
   const isOngoing = moment(moment()).isBetween(
     moment(quiz.startDate),
     moment(quiz.endDate),
