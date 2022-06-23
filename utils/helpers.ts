@@ -118,5 +118,21 @@ export const notifyStudents = async (quizId: string) => {
 
 export const deleteStudent = async (studentId: string) => {
   await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/student/${studentId}`);
-  mutate(`${process.env.NEXT_PUBLIC_API_URL}/student/all/verification/rejected`);
+  mutate(
+    `${process.env.NEXT_PUBLIC_API_URL}/student/all/verification/rejected`,
+  );
+};
+
+// helper function to delete a submission
+export const deleteSubmission = async (
+  submissionId: string,
+  quizId: string,
+) => {
+  console.log(submissionId);
+  await axios.delete(
+    `${process.env.NEXT_PUBLIC_API_URL}/submission/${submissionId}`,
+  );
+  mutate(
+    `${process.env.NEXT_PUBLIC_API_URL}/submission/quiz/${quizId}/minified`,
+  );
 };

@@ -6,10 +6,11 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import moment from "moment";
-import { MdRemoveRedEye } from "react-icons/md";
+import { MdDelete, MdRemoveRedEye } from "react-icons/md";
 import useSWR from "swr";
 import { Question } from "../../types/quiz";
 import { MinifiedSubmission } from "../../types/submission";
+import { deleteSubmission } from "../../utils";
 import { fetcher } from "../../utils/fetcher";
 import ActionButton from "./ActionButton";
 import Badge from "./Badge";
@@ -47,9 +48,7 @@ const SubmissionListItem: React.FC<SubmissionListItemProps> = ({
         </Badge>
         {student ? (
           <>
-            <Badge bgColor="bg-pink-100">
-              {student.bioData.regdNo}
-            </Badge>
+            <Badge bgColor="bg-pink-100">{student.bioData.regdNo}</Badge>
             <Badge bgColor="bg-yellow-100">{student.bioData.semester}</Badge>
             <Badge bgColor="bg-green-100">{student.bioData.branch}</Badge>
             <p className="font-poppins">{student.bioData.name}</p>
@@ -59,7 +58,15 @@ const SubmissionListItem: React.FC<SubmissionListItemProps> = ({
         )}
         {selected && (
           <div className="flex gap-4 ml-auto">
-            <ActionButton icon={MdRemoveRedEye} label="view" />
+            <ActionButton
+              icon={MdDelete}
+              label="delete"
+              color="text-red-500"
+              onClick={() =>
+                deleteSubmission(submission._id, submission.quizId)
+              }
+            />
+            {/* <ActionButton icon={MdRemoveRedEye} label="view" /> */}
           </div>
         )}
       </div>
